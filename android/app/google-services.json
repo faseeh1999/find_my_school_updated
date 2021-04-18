@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "968334332726",
+    "project_id": "findmyschool1999",
+    "storage_bucket": "findmyschool1999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968334332726:android:c0eeecbc5f083d405f5997",
+        "android_client_info": {
+          "package_name": "com.example.find_my_school_updated"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968334332726-6rjndkaa5e9d9absqaodg8m0a51oea0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcz_mmaeHBgOQOlkqeuguF9hbHhPTClnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968334332726-6rjndkaa5e9d9absqaodg8m0a51oea0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968334332726:android:2a7664274756f8d45f5997",
+        "android_client_info": {
+          "package_name": "com.example.findmyschool_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968334332726-6rjndkaa5e9d9absqaodg8m0a51oea0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcz_mmaeHBgOQOlkqeuguF9hbHhPTClnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968334332726-6rjndkaa5e9d9absqaodg8m0a51oea0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968334332726:android:24084f9832944ab25f5997",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968334332726-6rjndkaa5e9d9absqaodg8m0a51oea0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcz_mmaeHBgOQOlkqeuguF9hbHhPTClnI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968334332726-6rjndkaa5e9d9absqaodg8m0a51oea0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
