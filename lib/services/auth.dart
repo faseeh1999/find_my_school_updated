@@ -26,13 +26,13 @@ class AuthService {
     }
   }
 
-  //
   // register with email & pass
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
       //await DatabaseService(uid: user.uid).updateUserDate('0', 'Mario', 100);
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -49,5 +49,10 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+
+  // To Reset User Password
+  Future sendResetPasswordEmail(String email) async {
+    return _auth.sendPasswordResetEmail(email: email);
   }
 }

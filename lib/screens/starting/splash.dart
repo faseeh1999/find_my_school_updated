@@ -1,7 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:find_my_school_updated/screens/introduction.dart';
+import 'package:find_my_school_updated/screens/starting/introduction.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Splash extends StatefulWidget {
@@ -38,18 +37,17 @@ class _SplashState extends State<Splash> {
               padding: const EdgeInsets.only(bottom: 450.0),
               child: Center(
                 child: TextLiquidFill(
-                  loadDuration: Duration(seconds: 2),
-                  textAlign: TextAlign.center,
-                  text: 'Find My School',
-                  waveColor: Colors.blue[700],
-                  boxBackgroundColor: Colors.white,
-                  textStyle: GoogleFonts.sourceSansPro(
-                      textStyle: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  )),
-                ),
+                    loadDuration: Duration(seconds: 2),
+                    textAlign: TextAlign.center,
+                    text: 'Find My School',
+                    waveColor: Colors.blue[700],
+                    boxBackgroundColor: Colors.white,
+                    textStyle: TextStyle(
+                      fontFamily: 'ss',
+                      fontSize: 50.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    )),
               ),
             )
           ],

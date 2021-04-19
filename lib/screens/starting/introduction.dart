@@ -1,4 +1,5 @@
-import 'package:find_my_school_updated/screens/welcome.dart';
+import 'package:find_my_school_updated/screens/starting/welcome.dart';
+
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -11,7 +12,7 @@ class Introduction extends StatelessWidget {
           image: Image.asset('assets/images/is1.png'),
           title: "Find the best Schools",
           body:
-              "Enable Yourself to find the best possible school in all over Lahore",
+              "Enable Yourself to find the best possible school in all over Your Locality with your smartphone using this new app.",
           decoration: const PageDecoration(
             titleTextStyle: TextStyle(
                 fontFamily: 'ss', fontWeight: FontWeight.bold, fontSize: 25),
@@ -19,9 +20,9 @@ class Introduction extends StatelessWidget {
           )),
       PageViewModel(
           image: Image.asset('assets/images/is2.png'),
-          title: "Find the best Schools",
+          title: "Acquire all the information needed.",
           body:
-              "Enable Yourself to find the best possible school in all over Lahore",
+              "Find all the relevent information about each school listed, along with details, timings and much more.",
           decoration: const PageDecoration(
             titleTextStyle: TextStyle(
                 fontFamily: 'ss', fontWeight: FontWeight.bold, fontSize: 25),
@@ -29,9 +30,9 @@ class Introduction extends StatelessWidget {
           )),
       PageViewModel(
           image: Image.asset('assets/images/is3.png'),
-          title: "Find the best Schools",
+          title: "Locate Schools Easily",
           body:
-              "Enable Yourself to find the best possible school in all over Lahore",
+              "No more wasting asking for the location of the school and get the exact location & address for each school listed.",
           decoration: const PageDecoration(
             titleTextStyle: TextStyle(
                 fontFamily: 'ss', fontWeight: FontWeight.bold, fontSize: 25),

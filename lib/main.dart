@@ -1,6 +1,4 @@
-import 'package:find_my_school_updated/screens/home.dart';
-import 'package:find_my_school_updated/screens/splash.dart';
-import 'package:find_my_school_updated/screens/wrapper.dart';
+import 'package:find_my_school_updated/screens/starting/splash.dart';
 import 'package:find_my_school_updated/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
