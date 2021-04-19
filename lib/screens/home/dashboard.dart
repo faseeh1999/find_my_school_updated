@@ -3,6 +3,7 @@ import 'package:find_my_school_updated/screens/home/home.dart';
 import 'package:find_my_school_updated/screens/search/search.dart';
 import 'package:find_my_school_updated/screens/settings/settings.dart';
 import 'package:find_my_school_updated/shared/constants.dart';
+import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.brown[100],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0.0,
-        selectedItemColor: Colors.blueAccent,
+        selectedItemColor: primaryColor,
         unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
