@@ -1,4 +1,5 @@
 import 'package:find_my_school_updated/screens/settings/about.dart';
+import 'package:find_my_school_updated/screens/settings/account.dart';
 import 'package:find_my_school_updated/screens/settings/changePassword.dart';
 import 'package:find_my_school_updated/screens/settings/contact.dart';
 import 'package:find_my_school_updated/screens/settings/privacy.dart';
@@ -75,7 +76,14 @@ class SettingsScreen extends StatelessWidget {
                     child: RaisedButton(
                       elevation: 0.5,
                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: AccountScreen(),
+                                type: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 300)));
+                      },
                       textColor: Colors.black,
                       color: Colors.white,
                       child: Align(
