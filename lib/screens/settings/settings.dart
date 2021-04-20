@@ -5,7 +5,9 @@ import 'package:find_my_school_updated/screens/settings/privacy.dart';
 import 'package:find_my_school_updated/screens/settings/terms.dart';
 import 'package:find_my_school_updated/services/auth.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
+import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -27,54 +29,44 @@ class SettingsScreen extends StatelessWidget {
       drawer: MainDrawer(),
       body: Stack(
         children: [
-          Image.asset(
-            'assets/images/Settings.png',
-            fit: BoxFit.cover,
+          Container(
+            height: size.height * 0.25,
+            width: size.width,
+            color: primaryColor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Final All",
+                  style: TextStyle(
+                    fontFamily: 'ss',
+                    color: Colors.white,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  "What you need",
+                  style: TextStyle(
+                    fontFamily: 'ss',
+                    color: Colors.white,
+                    fontSize: 35,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ],
+            ),
           ),
           Center(
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(0.3),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 0), // changes position of shadow
-                        ),
-                      ],
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      size: 50.0,
-                    ),
-                  ),
                   SizedBox(
-                    height: size.height * 0.04,
-                  ),
-                  Text(
-                    "Name",
-                    style: TextStyle(
-                        fontFamily: 'ss', fontSize: 20, color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.02,
-                  ),
-                  Text(
-                    "Email",
-                    style: TextStyle(
-                        fontFamily: 'ss', fontSize: 14, color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: size.height * 0.08,
+                    height: size.height * 0.25,
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
