@@ -1,9 +1,12 @@
+import 'package:find_my_school_updated/services/mail.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:find_my_school_updated/theme/text.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 
 class ContactUs extends StatelessWidget {
+  MailService _mail = MailService();
+
   final TextEditingController _email = TextEditingController();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _message = TextEditingController();
@@ -11,10 +14,8 @@ class ContactUs extends StatelessWidget {
   final validateName = ValidationBuilder().required().build();
   final validateEmail =
       ValidationBuilder().required().email().maxLength(50).build();
-  final validateMessage = ValidationBuilder()
-      .required("This field is Required")
-      .maxLength(100)
-      .build();
+  final validateMessage =
+      ValidationBuilder().required().minLength(50).maxLength(500).build();
 
   GlobalKey<FormState> _form = GlobalKey<FormState>();
 
@@ -107,12 +108,13 @@ class ContactUs extends StatelessWidget {
                                 maxLines: 7,
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
-                                validator: (String val) {
-                                  if (val.isEmpty) {
-                                    return "This field is required.";
-                                  }
-                                  return null;
-                                },
+                                validator: validateMessage,
+                                // validator: (String val) {
+                                //   if (val.isEmpty) {
+                                //     return "This field is required.";
+                                //   }
+                                //   return null;
+                                // },
                                 decoration: InputDecoration(
                                     alignLabelWithHint: true,
                                     labelText: "Your Message",
@@ -121,29 +123,56 @@ class ContactUs extends StatelessWidget {
                               SizedBox(
                                 height: size.height * 0.05,
                               ),
-                              RaisedButton(
-                                onPressed: () {
+                              RaisedButton.icon(
+                                elevation: 3.0,
+                                onPressed: () async {
                                   if (_validate() == true) {
-                                    print("All fields are ok");
+                                    await _mail.sendMail();
+                                    Widget okButton = FlatButton(
+                                      child: Text("OK"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        //Navigator.pop(context);
+                                      },
+                                    );
+
+                                    // set up the AlertDialog
+                                    AlertDialog alert = AlertDialog(
+                                      title: Text("Message Sent"),
+                                      content: Text(
+                                          "Your Message has been sent to administration team, they will contact you back shortly."),
+                                      actions: [
+                                        okButton,
+                                      ],
+                                    );
+                                    // show the dialog
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return alert;
+                                      },
+                                    );
                                   }
                                 },
-                                child: Text(
-                                  "Submit",
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(18.0))),
+                                label: Text(
+                                  'Send Message',
                                   style: ButtonTextStyle,
                                 ),
-                                elevation: 2.0,
-                                highlightElevation: 8.0,
-                                color: primaryColor,
+                                icon: Icon(
+                                  Icons.send_outlined,
+                                  color: Colors.white,
+                                ),
                                 textColor: Colors.white,
-                                splashColor: Colors.blue[200],
+                                splashColor: Colors.blueAccent,
+                                color: buttonColor,
                                 padding: EdgeInsets.only(
-                                    left: 75.0,
-                                    right: 75.0,
+                                    left: 35.0,
+                                    right: 35.0,
                                     top: 10.0,
                                     bottom: 10.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                ),
                               ),
                             ],
                           ),
