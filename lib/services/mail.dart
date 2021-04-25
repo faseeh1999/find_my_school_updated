@@ -10,7 +10,7 @@ class MailService {
     final smtpServer = gmail(username, password);
 
     // Create our message.
-    final message = Message()
+    final adminMessage = Message()
       ..from = Address(username)
       ..recipients.addAll(['faseehshahzad.fs@gmail.com', 'faseehdon@gmail.com'])
       ..subject = 'Test Subject :: 😀 :: ${DateTime.now()}'
@@ -18,8 +18,16 @@ class MailService {
       ..html =
           "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
 
+    final userMessage = Message()
+      ..from = Address(username)
+      ..recipients.add('faseehdon@gmail.com')
+      ..subject = 'User Message :: 😀 :: ${DateTime.now()}'
+      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+      ..html =
+          "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
+
     try {
-      final sendReport = await send(message, smtpServer);
+      final sendReport = await send(adminMessage, smtpServer);
       print('Message sent: ' + sendReport.toString());
     } on MailerException catch (e) {
       print('Message not sent.');
@@ -34,7 +42,8 @@ class MailService {
     var connection = PersistentConnection(smtpServer);
 
     // Send the first message
-    await connection.send(message);
+    await connection.send(adminMessage);
+    await connection.send(userMessage);
 
     // close the connection
     await connection.close();
