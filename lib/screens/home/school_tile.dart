@@ -6,6 +6,7 @@ class SchoolTile extends StatelessWidget {
   SchoolTile({this.school});
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
@@ -19,8 +20,10 @@ class SchoolTile extends StatelessWidget {
           ),
           title: Text(
             school.name,
+            style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.045),
           ),
-          subtitle: Text("${school.address}"),
+          subtitle: Text("${school.address}",
+              style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
         ),
       ),
     );
