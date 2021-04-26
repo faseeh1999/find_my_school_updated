@@ -14,7 +14,7 @@ class MailService {
       ..from = Address(username)
       ..recipients.add('faseehshahzad.fs@gmail.com')
       ..subject = '$name from $email has a Query'
-      ..text = '${message}';
+      ..text = '$message';
     // ..html =
     //     "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
 
@@ -27,15 +27,15 @@ class MailService {
     // ..html =
     //     "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
 
-    try {
-      final sendReport = await send(adminMessage, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
+    // try {
+    //   final sendReport = await send(adminMessage, smtpServer);
+    //   print('Message sent: ' + sendReport.toString());
+    // } on MailerException catch (e) {
+    //   print('Message not sent.');
+    //   for (var p in e.problems) {
+    //     print('Problem: ${p.code}: ${p.msg}');
+    //   }
+    // }
 
     // Sending multiple messages with the same connection
     //

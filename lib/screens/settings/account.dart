@@ -134,11 +134,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                     SizedBox(height: size.height * 0.02),
                                     TextFormField(
                                       initialValue: userData.email,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          email = val;
-                                        });
-                                      },
+                                      enabled: false,
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                       validator: validateEmail,
@@ -200,7 +196,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                       uid: user.uid)
                                                   .updateUserDate(
                                                       name ?? userData.name,
-                                                      email ?? userData.email,
+                                                      userData.email,
                                                       phone ?? userData.phone)
                                                   .whenComplete(() => {
                                                         setState(() {
