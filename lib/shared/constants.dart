@@ -31,3 +31,8 @@ BottomNavigationBarItem settings = BottomNavigationBarItem(
   icon: Icon(Icons.settings),
   label: "Settings",
 );
+
+BottomNavigationBarItem notification = BottomNavigationBarItem(
+  icon: Icon(Icons.notifications_none_outlined),
+  label: "Notification",
+);

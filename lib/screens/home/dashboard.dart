@@ -1,5 +1,6 @@
 import 'package:find_my_school_updated/screens/bookmarks/bookmarks.dart';
 import 'package:find_my_school_updated/screens/home/home.dart';
+import 'package:find_my_school_updated/screens/notification/notifications.dart';
 import 'package:find_my_school_updated/screens/search/search.dart';
 import 'package:find_my_school_updated/screens/settings/settings.dart';
 import 'package:find_my_school_updated/shared/constants.dart';
@@ -12,11 +13,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
   var _screens = [
     SearchScreen(),
-    HomeScreen(),
     BookmarksScreen(),
+    HomeScreen(),
+    NotificationScreen(),
     SettingsScreen()
   ];
 
@@ -32,8 +34,9 @@ class _HomeState extends State<Home> {
         type: BottomNavigationBarType.fixed,
         items: [
           search,
-          home,
           bookmarks,
+          home,
+          notification,
           settings,
         ],
         currentIndex: _selectedIndex,
