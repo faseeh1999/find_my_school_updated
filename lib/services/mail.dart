@@ -3,7 +3,7 @@ import 'package:mailer/smtp_server/gmail.dart';
 
 class MailService {
 //String name , String email, String message
-  Future sendMail() async {
+  Future sendMail(String name, String email, String message) async {
     String username = 'findmyschool2021@gmail.com';
     String password = 'findmyschool123';
 
@@ -12,19 +12,20 @@ class MailService {
     // Create our message.
     final adminMessage = Message()
       ..from = Address(username)
-      ..recipients.addAll(['faseehshahzad.fs@gmail.com', 'faseehdon@gmail.com'])
-      ..subject = 'Test Subject :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html =
-          "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
+      ..recipients.add('faseehshahzad.fs@gmail.com')
+      ..subject = '$name from $email has a Query'
+      ..text = '${message}';
+    // ..html =
+    //     "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
 
     final userMessage = Message()
       ..from = Address(username)
-      ..recipients.add('faseehdon@gmail.com')
-      ..subject = 'User Message :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html =
-          "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
+      ..recipients.add(email)
+      ..subject = 'Thanks for contacting Find My School.'
+      ..text =
+          'Our Administration team is working day and night on better customer support and to resolve your queries.\nWe will get back to you within 24 hrs.\n\nRegards, Find My School Admin Team';
+    // ..html =
+    //     "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
 
     try {
       final sendReport = await send(adminMessage, smtpServer);

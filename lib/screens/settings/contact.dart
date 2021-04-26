@@ -145,7 +145,8 @@ class _ContactUsState extends State<ContactUs> {
                                             isLoading = true;
                                           });
                                           await _mail
-                                              .sendMail()
+                                              .sendMail(_name.text, _email.text,
+                                                  _message.text)
                                               .whenComplete(() => {
                                                     setState(() {
                                                       isLoading = false;
@@ -159,6 +160,7 @@ class _ContactUsState extends State<ContactUs> {
                                               _email.clear();
                                               _message.clear();
                                               _name.clear();
+                                              Navigator.pop(context);
                                             },
                                           );
 
