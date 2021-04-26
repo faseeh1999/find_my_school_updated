@@ -1,4 +1,4 @@
-import 'package:find_my_school_updated/shared/constants.dart';
+import 'package:find_my_school_updated/shared/drawer.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -6,9 +6,16 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [logoutIcon],
-        title: Text("Notifications"),
+        iconTheme: IconThemeData(color: Colors.black),
+        elevation: 0.0,
+        backgroundColor: Colors.white,
+        title: Text(
+          "Notifications",
+          style: TextStyle(color: Colors.black, fontFamily: "ss"),
+        ),
+        centerTitle: true,
       ),
+      drawer: MainDrawer(),
       body: Center(
         child: Text("Notifications Screen"),
       ),

@@ -6,7 +6,7 @@ import 'package:find_my_school_updated/theme/color.dart';
 import 'package:find_my_school_updated/theme/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:form_validator/form_validator.dart';
+//import 'package:form_validator/form_validator.dart';
 import 'package:provider/provider.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -19,45 +19,45 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   bool isLoading = false;
 
-  final TextEditingController _oldPassword = TextEditingController();
-  final TextEditingController _newPassword = TextEditingController();
-  final TextEditingController _confirmNewPassword = TextEditingController();
+  // final TextEditingController _oldPassword = TextEditingController();
+  // final TextEditingController _newPassword = TextEditingController();
+  // final TextEditingController _confirmNewPassword = TextEditingController();
   final AuthService _auth = AuthService();
 
-  bool _validate() {
-    return _form.currentState.validate();
-  }
+  // bool _validate() {
+  //   return _form.currentState.validate();
+  // }
 
-  bool _obscureOldPass = true;
+  //bool _obscureOldPass = true;
 
-  void _toggleOldPass() {
-    setState(() {
-      _obscureOldPass = !_obscureOldPass;
-    });
-  }
+  // void _toggleOldPass() {
+  //   setState(() {
+  //     _obscureOldPass = !_obscureOldPass;
+  //   });
+  // }
 
-  bool _obscureNewPass = true;
+  // bool _obscureNewPass = true;
 
-  void _toggleNewPass() {
-    setState(() {
-      _obscureNewPass = !_obscureNewPass;
-    });
-  }
+  // void _toggleNewPass() {
+  //   setState(() {
+  //     _obscureNewPass = !_obscureNewPass;
+  //   });
+  // }
 
-  bool _obscureConfirmPass = true;
-  bool checkCurrentPassowrd = true;
+  // bool _obscureConfirmPass = true;
+  // bool checkCurrentPassowrd = true;
 
-  void _toggleConfirmPass() {
-    setState(() {
-      _obscureConfirmPass = !_obscureConfirmPass;
-    });
-  }
+  // void _toggleConfirmPass() {
+  //   setState(() {
+  //     _obscureConfirmPass = !_obscureConfirmPass;
+  //   });
+  // }
 
-  final validateOldPass =
-      ValidationBuilder().required().minLength(6).maxLength(20).build();
+  // final validateOldPass =
+  //     ValidationBuilder().required().minLength(6).maxLength(20).build();
 
-  final validateNewPass =
-      ValidationBuilder().required().minLength(6).maxLength(20).build();
+  // final validateNewPass =
+  //     ValidationBuilder().required().minLength(6).maxLength(20).build();
 
   //= ValidationBuilder().test(_newPassword.text);
 

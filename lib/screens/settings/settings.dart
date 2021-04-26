@@ -12,7 +12,7 @@ import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SettingsScreen extends StatelessWidget {
-  AuthService _auth = AuthService();
+  final _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

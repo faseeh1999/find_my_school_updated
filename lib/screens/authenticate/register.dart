@@ -1,8 +1,6 @@
-import 'package:find_my_school_updated/models/user.dart';
-
 import 'package:find_my_school_updated/screens/authenticate/wrapper.dart';
 import 'package:find_my_school_updated/services/auth.dart';
-import 'package:find_my_school_updated/services/database.dart';
+
 import 'package:find_my_school_updated/shared/loader.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:find_my_school_updated/theme/text.dart';

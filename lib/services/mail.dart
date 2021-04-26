@@ -7,6 +7,7 @@ class MailService {
     String username = 'findmyschool2021@gmail.com';
     String password = 'findmyschool123';
 
+    // ignore: deprecated_member_use
     final smtpServer = gmail(username, password);
 
     // Create our message.

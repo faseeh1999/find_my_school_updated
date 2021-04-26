@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MainDrawer extends StatelessWidget {
-  AuthService _auth = AuthService();
+  final _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
