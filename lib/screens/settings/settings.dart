@@ -226,6 +226,7 @@ class SettingsScreen extends StatelessWidget {
                         Widget logoutButton = FlatButton(
                           child: Text("Logout"),
                           onPressed: () async {
+                            Navigator.of(context).pop();
                             await _auth.signOut();
                           },
                         );

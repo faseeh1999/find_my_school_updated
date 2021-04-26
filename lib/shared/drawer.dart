@@ -4,7 +4,7 @@ import 'package:find_my_school_updated/screens/notification/notifications.dart';
 import 'package:find_my_school_updated/screens/search/search.dart';
 import 'package:find_my_school_updated/screens/settings/settings.dart';
 import 'package:find_my_school_updated/services/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 

@@ -206,18 +206,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   setState(() {
                                     isLoading = true;
                                   });
-                                  User result =
-                                      await _auth.registerWithEmailAndPassword(
-                                          _email.text, _pass.text);
-                                  await DatabaseService(uid: result.uid)
-                                      .updateUserDate(
-                                          _name.text, _email.text, _phone.text);
-                                  if (result == null) {
+
+                                  await _auth
+                                      .registerWithEmailAndPassword(_name.text,
+                                          _email.text, _pass.text, _phone.text)
+                                      .whenComplete(() {
                                     setState(() {
                                       isLoading = false;
-                                      //error = "Please Provide a Valid Email";
                                     });
-                                  }
+                                  });
                                 }
                               },
                               shape: RoundedRectangleBorder(

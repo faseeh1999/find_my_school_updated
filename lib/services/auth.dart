@@ -1,4 +1,5 @@
 import 'package:find_my_school_updated/models/user.dart';
+import 'package:find_my_school_updated/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -27,17 +28,34 @@ class AuthService {
   }
 
   // register with email & pass
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String name, String email, String password, String phone) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
 
-      //await DatabaseService(uid: user.uid).updateUserDate('0', 'Mario', 100);
+      await DatabaseService(uid: user.uid).updateUserDate(name, email, phone);
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
       return null;
+    }
+  }
+
+  // To Re Authenticate User
+  Future<bool> validatePassword(String password) async {
+    var firebaseUser = await _auth.currentUser();
+
+    var authCredentials = EmailAuthProvider.getCredential(
+        email: firebaseUser.email, password: password);
+    try {
+      var authResult =
+          await firebaseUser.reauthenticateWithCredential(authCredentials);
+      return authResult.user != null;
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 
