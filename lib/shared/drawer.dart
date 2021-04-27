@@ -239,6 +239,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                       Widget logoutButton = FlatButton(
                                         child: Text("Logout"),
                                         onPressed: () async {
+                                          Navigator.of(context).pop();
                                           await _auth.signOut();
                                         },
                                       );

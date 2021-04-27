@@ -196,7 +196,7 @@ class _AccountScreenState extends State<AccountScreen> {
                                                       uid: user.uid)
                                                   .updateUserDate(
                                                       name ?? userData.name,
-                                                      userData.email,
+                                                      email ?? userData.email,
                                                       phone ?? userData.phone)
                                                   .whenComplete(() => {
                                                         setState(() {
