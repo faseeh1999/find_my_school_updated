@@ -22,18 +22,11 @@ class _NotificationTileState extends State<NotificationTile> {
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: ListTile(
           leading: CircleAvatar(
-            // backgroundImage: NetworkImage(widget.notification.text),
             backgroundColor: Colors.blueAccent,
             radius: 25.0,
           ),
-          // title: Text(
-          //   widget.notification.text,
-          //   style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.045),
-          // ),
-
-          subtitle: Text("Hello",
+          subtitle: Text("${widget.notification.text}",
               style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
-          trailing: Icon(Icons.share_rounded),
         ),
       ),
     );
