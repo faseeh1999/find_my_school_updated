@@ -1,9 +1,40 @@
 import 'package:find_my_school_updated/models/school.dart';
+
+import 'package:find_my_school_updated/services/database.dart';
+import 'package:find_my_school_updated/shared/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
-class SchoolTile extends StatelessWidget {
+class SchoolTile extends StatefulWidget {
   final School school;
   SchoolTile({this.school});
+
+  @override
+  _SchoolTileState createState() => _SchoolTileState();
+}
+
+class _SchoolTileState extends State<SchoolTile> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  bool isBookmarked = false;
+
+  void addBookmarkToFirebase() async {
+    // final FirebaseUser user = await auth.currentUser();
+    // await DatabaseService(uid: user.uid).addBookmark(widget.school.sid);
+    setState(() {
+      isBookmarked = !isBookmarked;
+    });
+  }
+
+  void removeBookmarkToFirebase() async {
+    // final FirebaseUser user = await auth.currentUser();
+    // await DatabaseService(uid: user.uid).addBookmark(widget.school.sid);
+    setState(() {
+      isBookmarked = !isBookmarked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -14,16 +45,21 @@ class SchoolTile extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
         child: ListTile(
           leading: CircleAvatar(
-            //backgroundImage: AssetImage('assets/coffee_icon.png'),
+            backgroundImage: NetworkImage(widget.school.image),
             backgroundColor: Colors.blueAccent,
             radius: 25.0,
           ),
           title: Text(
-            school.name,
+            widget.school.name,
             style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.045),
           ),
-          subtitle: Text("${school.address}",
+          subtitle: Text("${widget.school.address}",
               style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
+          trailing: IconButton(
+            icon: isBookmarked ? bookmarkIconComp : bookmarkIconInit,
+            onPressed:
+                isBookmarked ? removeBookmarkToFirebase : addBookmarkToFirebase,
+          ),
         ),
       ),
     );

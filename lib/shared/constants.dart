@@ -36,3 +36,11 @@ BottomNavigationBarItem notification = BottomNavigationBarItem(
   icon: Icon(Icons.notifications_none_outlined),
   label: "Notification",
 );
+Icon bookmarkIconInit = Icon(
+  Icons.star_border_outlined,
+  color: Colors.blueAccent,
+);
+Icon bookmarkIconComp = Icon(
+  Icons.star,
+  color: Colors.blueAccent,
+);
