@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:find_my_school_updated/models/notification.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/models/user.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class DatabaseService {
   final _auth = FirebaseAuth.instance;
@@ -10,12 +12,20 @@ class DatabaseService {
   final String uid; // for user id
   DatabaseService({this.uid, this.sid});
 
-  // Collection Reference
+  // Collection References
+
+// User Collection Reference
 
   final CollectionReference userCollection =
       Firestore.instance.collection('users');
+
+  // School Collection Reference
   final CollectionReference schoolCollection =
       Firestore.instance.collection('institutes');
+
+  // Notification Collection Reference
+  final CollectionReference notificationCollection =
+      Firestore.instance.collection('notifications');
 
   Future updateUserDate(String name, String email, String phone) async {
     return await userCollection.document(uid).setData({
@@ -61,6 +71,22 @@ class DatabaseService {
   // School Stream
   Stream<List<School>> get schools {
     return schoolCollection.snapshots().map(_schoolListfromSnapshot);
+  }
+
+// Notifications  Stream
+  Stream<List<Notifications>> get notification {
+    return notificationCollection
+        .snapshots()
+        .map(_notificationListfromSnapshot);
+  }
+
+  //convert Query Snapshot to Notifications List
+  List<Notifications> _notificationListfromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Notifications(
+        text: doc.data['text'],
+      );
+    }).toList();
   }
 
   // // Bookmarks Stream
