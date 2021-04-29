@@ -17,16 +17,20 @@ class _NotificationTileState extends State<NotificationTile> {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
-      child: Card(
-        color: Colors.white,
-        margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.blueAccent,
-            radius: 25.0,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          color: Colors.grey[300],
+          margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+          child: ListTile(
+            leading: Icon(
+              Icons.share_rounded,
+              color: Colors.blueAccent,
+            ),
+            subtitle: Text("${widget.notification.text}",
+                style:
+                    TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
           ),
-          subtitle: Text("${widget.notification.text}",
-              style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
         ),
       ),
     );

@@ -3,6 +3,7 @@ import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/services/database.dart';
 import 'package:find_my_school_updated/shared/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,7 @@ class _SchoolTileState extends State<SchoolTile> {
         child: ListTile(
           leading: CircleAvatar(
             backgroundImage: NetworkImage(widget.school.image),
-            backgroundColor: Colors.blueAccent,
+            backgroundColor: Colors.white,
             radius: 25.0,
           ),
           title: Text(
@@ -55,11 +56,26 @@ class _SchoolTileState extends State<SchoolTile> {
           ),
           subtitle: Text("${widget.school.address}",
               style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
-          trailing: IconButton(
-            icon: isBookmarked ? bookmarkIconComp : bookmarkIconInit,
-            onPressed:
-                isBookmarked ? removeBookmarkToFirebase : addBookmarkToFirebase,
+          trailing: RatingBar.builder(
+            itemSize: size.width * 0.04,
+            initialRating: widget.school.rating,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.blueAccent,
+            ),
+            onRatingUpdate: (rating) {
+              print(rating);
+            },
           ),
+          // trailing: IconButton(
+          //   icon: isBookmarked ? bookmarkIconComp : bookmarkIconInit,
+          //   onPressed:
+          //       isBookmarked ? removeBookmarkToFirebase : addBookmarkToFirebase,
+          // ),
         ),
       ),
     );

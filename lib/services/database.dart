@@ -49,12 +49,12 @@ class DatabaseService {
   List<School> _schoolListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return School(
-        sid: sid,
-        name: doc.data['name'] ?? "Unknown",
-        address: doc.data['address'] ?? "not present",
-        contact: doc.data['contactnumber'] ?? "no contact",
-        image: doc.data['image'] ?? "",
-      );
+          sid: sid,
+          name: doc.data['name'] ?? "Unknown",
+          address: doc.data['address'] ?? "not present",
+          contact: doc.data['contactnumber'] ?? "no contact",
+          image: doc.data['image'] ?? "",
+          rating: doc.data['rating'] ?? 1.0);
     }).toList();
   }
 

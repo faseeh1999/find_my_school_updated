@@ -12,7 +12,6 @@ class _NotificationListState extends State<NotificationList> {
   @override
   Widget build(BuildContext context) {
     final notification = Provider.of<List<Notifications>>(context) ?? [];
-    print(notification);
 
     return ListView.builder(
         itemCount: notification.length,
