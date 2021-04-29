@@ -38,13 +38,15 @@ class _SchoolDetailState extends State<SchoolDetail> {
                 Container(
                   height: size.height * 0.3,
                   width: size.width,
+
                   decoration: BoxDecoration(
+                      color: Colors.blueAccent,
                       image: DecorationImage(
-                    colorFilter: new ColorFilter.mode(
-                        Colors.black.withOpacity(0.5), BlendMode.darken),
-                    fit: BoxFit.cover,
-                    image: NetworkImage(widget.school.bg),
-                  )),
+                        colorFilter: new ColorFilter.mode(
+                            Colors.black.withOpacity(0.5), BlendMode.darken),
+                        fit: BoxFit.cover,
+                        image: NetworkImage(widget.school.bg),
+                      )),
                   //color: primaryColor,
                   child: Padding(
                     padding: const EdgeInsets.all(60.0),

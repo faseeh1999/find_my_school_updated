@@ -68,7 +68,7 @@ class _SchoolTileState extends State<SchoolTile> {
           },
           title: Text(
             widget.school.name,
-            style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.045),
+            style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.04),
           ),
           subtitle: Text("${widget.school.address}",
               style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
