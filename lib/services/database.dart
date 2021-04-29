@@ -54,6 +54,7 @@ class DatabaseService {
           address: doc.data['address'] ?? "not present",
           contact: doc.data['contactnumber'] ?? "no contact",
           image: doc.data['image'] ?? "",
+          bg: doc.data['bg'] ?? "",
           rating: doc.data['rating'] ?? 1.0);
     }).toList();
   }

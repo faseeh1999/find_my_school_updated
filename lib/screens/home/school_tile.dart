@@ -1,4 +1,5 @@
 import 'package:find_my_school_updated/models/school.dart';
+import 'package:find_my_school_updated/screens/home/school_detail.dart';
 
 import 'package:find_my_school_updated/services/database.dart';
 import 'package:find_my_school_updated/shared/constants.dart';
@@ -6,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class SchoolTile extends StatefulWidget {
   final School school;
@@ -39,6 +42,7 @@ class _SchoolTileState extends State<SchoolTile> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final schools = Provider.of<List<School>>(context) ?? [];
     return Padding(
       padding: EdgeInsets.only(top: 8.0),
       child: Card(
@@ -50,6 +54,18 @@ class _SchoolTileState extends State<SchoolTile> {
             backgroundColor: Colors.white,
             radius: 25.0,
           ),
+          onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    child: PageView.builder(itemBuilder: (context, index) {
+                      return SchoolDetail(
+                        school: widget.school,
+                      );
+                    }),
+                    type: PageTransitionType.rightToLeftWithFade,
+                    duration: Duration(milliseconds: 200)));
+          },
           title: Text(
             widget.school.name,
             style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.045),

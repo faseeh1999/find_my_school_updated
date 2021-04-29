@@ -4,6 +4,7 @@ class School {
   final String address;
   final String contact;
   final String image;
+  final String bg;
   final double rating;
 
   School(
@@ -12,5 +13,6 @@ class School {
       this.address,
       this.contact,
       this.image,
+      this.bg,
       this.rating});
 }
