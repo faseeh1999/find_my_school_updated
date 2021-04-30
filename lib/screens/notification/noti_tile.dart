@@ -20,12 +20,16 @@ class _NotificationTileState extends State<NotificationTile> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-          color: Colors.grey[300],
+          color: Colors.white,
           margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
           child: ListTile(
             leading: Icon(
               Icons.share_rounded,
               color: Colors.blueAccent,
+            ),
+            title: Text(
+              "Test Notification",
+              style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.04),
             ),
             subtitle: Text("${widget.notification.text}",
                 style:
