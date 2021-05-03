@@ -137,21 +137,32 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Icon(
-                                        Icons.person,
+                                      IconButton(
+                                        icon: Icon(Icons.public_outlined),
                                         color: primaryColor,
-                                        size: size.width * 0.08,
+                                        iconSize: size.width * 0.08,
+                                        onPressed: () {
+                                          launch('https://lgs.edu.pk/');
+                                        },
                                       ),
-                                      Icon(
-                                        Icons.location_on_outlined,
+                                      IconButton(
+                                        icon: Icon(Icons.location_on_outlined),
                                         color: primaryColor,
-                                        size: size.width * 0.08,
+                                        iconSize: size.width * 0.08,
+                                        onPressed: () {
+                                          launch(
+                                              'https://goo.gl/maps/dX5zePoJLTKp4TzdA');
+                                        },
                                       ),
-                                      Icon(
-                                        Icons.phone,
+                                      IconButton(
+                                        icon: Icon(Icons.phone),
                                         color: primaryColor,
-                                        size: size.width * 0.08,
-                                      ),
+                                        iconSize: size.width * 0.08,
+                                        onPressed: () {
+                                          launch(
+                                              "tel://${widget.school.contact}");
+                                        },
+                                      )
                                     ],
                                   ),
                                   SizedBox(
@@ -162,31 +173,28 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                         MainAxisAlignment.spaceAround,
                                     children: [
                                       Text(
-                                        widget.school.rating.toString(),
-                                        maxLines: 2,
+                                        "Website",
+                                        //maxLines: 2,
                                         //overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontFamily: 'ss',
-                                            fontSize: size.width * 0.03),
-                                      ),
-                                      Container(
-                                        width: 100,
-                                        child: Text(
-                                          widget.school.address,
-                                          maxLines: 2,
-                                          //overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontFamily: 'ss',
-                                              fontSize: size.width * 0.03),
-                                        ),
+                                            fontSize: size.width * 0.04),
                                       ),
                                       Text(
-                                        widget.school.contact,
+                                        "Location",
                                         maxLines: 2,
                                         //overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
                                             fontFamily: 'ss',
-                                            fontSize: size.width * 0.03),
+                                            fontSize: size.width * 0.04),
+                                      ),
+                                      Text(
+                                        "Contact",
+                                        maxLines: 2,
+                                        //overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontFamily: 'ss',
+                                            fontSize: size.width * 0.04),
                                       ),
                                     ],
                                   ),
@@ -272,7 +280,6 @@ class _SchoolDetailState extends State<SchoolDetail> {
                     Container(
                       height: size.height * 0.3,
                       width: size.width,
-
                       decoration: BoxDecoration(
                           color: Colors.blueAccent,
                           image: DecorationImage(
@@ -282,19 +289,6 @@ class _SchoolDetailState extends State<SchoolDetail> {
                             fit: BoxFit.cover,
                             image: NetworkImage(widget.school.bg),
                           )),
-                      //color: primaryColor,
-                      // child: Padding(
-                      //   padding: const EdgeInsets.all(60.0),
-                      //   child: Text(
-                      //     widget.school.name,
-                      //     style: TextStyle(
-                      //       fontFamily: 'ss',
-                      //       color: Colors.white,
-                      //       fontSize: 25,
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   ),
-                      // ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 50.0),
@@ -308,180 +302,123 @@ class _SchoolDetailState extends State<SchoolDetail> {
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: size.width * 0.1,
-                                      ),
                                       CircleAvatar(
                                         backgroundImage:
                                             NetworkImage(widget.school.image),
                                         backgroundColor: Colors.blueAccent,
                                         radius: size.width * 0.08,
                                       ),
-                                      IconButton(
-                                          icon: Icon(
-                                            Icons.favorite_border_outlined,
-                                            color: primaryColor,
-                                            size: size.width * 0.08,
-                                          ),
-                                          onPressed: null)
                                     ],
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.025,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      widget.school.name,
+                                      style: TextStyle(
+                                          fontSize: size.width * 0.045,
+                                          fontFamily: 'ss',
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.02,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: RatingBar.builder(
+                                      itemSize: size.width * 0.04,
+                                      initialRating: widget.school.rating,
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.blueAccent,
+                                      ),
+                                      onRatingUpdate: (rating) {
+                                        print(rating);
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.05,
+                                  ),
+                                  Text(
+                                    "Curriculum",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.05),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.015,
+                                  ),
+                                  Text(
+                                    "Nulla nostrud ullamco occaecat eu fugiat aliqua elit Lorem labore laboris ad consectetur. Sit exercitation dolore eu consectetur nostrud aliqua aliqua cupidatat Lorem ullamco deserunt qui anim. Ad quis consectetur officia nisi Lorem esse sint qui velit officia amet. Irure reprehenderit in dolor et eiusmod velit cupidatat laboris do.",
+                                    style: TextStyle(
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.037,
+                                        fontWeight: FontWeight.normal),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.025,
                                   ),
                                   Text(
-                                    widget.school.name,
+                                    "Fee Structure",
                                     style: TextStyle(
-                                        fontSize: size.width * 0.045,
+                                        fontWeight: FontWeight.bold,
                                         fontFamily: 'ss',
-                                        fontWeight: FontWeight.w700),
+                                        fontSize: size.width * 0.05),
                                   ),
                                   SizedBox(
-                                    height: size.height * 0.02,
+                                    height: size.height * 0.015,
                                   ),
-                                  RatingBar.builder(
-                                    itemSize: size.width * 0.04,
-                                    initialRating: widget.school.rating,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: true,
-                                    itemCount: 5,
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.blueAccent,
-                                    ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
-                                    },
+                                  Text(
+                                    "Nostrud nulla dolore nostrud nisi aliqua quis qui elit quis deserunt nostrud labore veniam.",
+                                    style: TextStyle(
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.037,
+                                        fontWeight: FontWeight.normal),
                                   ),
                                   SizedBox(
                                     height: size.height * 0.05,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Icon(
-                                        Icons.person,
-                                        color: primaryColor,
-                                        size: size.width * 0.08,
-                                      ),
-                                      Icon(
-                                        Icons.location_on_outlined,
-                                        color: primaryColor,
-                                        size: size.width * 0.08,
-                                      ),
-                                      Icon(
-                                        Icons.phone,
-                                        color: primaryColor,
-                                        size: size.width * 0.08,
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: size.height * 0.025,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text(
-                                        widget.school.rating.toString(),
-                                        maxLines: 2,
-                                        //overflow: TextOverflow.ellipsis,
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        launch('https://lgs.edu.pk/');
+                                      },
+                                      child: Text(
+                                        "More Deatils",
                                         style: TextStyle(
+                                            color: Colors.transparent,
+                                            shadows: [
+                                              Shadow(
+                                                  color: Colors.black,
+                                                  offset: Offset(0, -5))
+                                            ],
+                                            decorationColor: Colors.black,
+                                            decorationStyle:
+                                                TextDecorationStyle.dashed,
+                                            decorationThickness:
+                                                size.width * 0.005,
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontWeight: FontWeight.bold,
                                             fontFamily: 'ss',
-                                            fontSize: size.width * 0.03),
+                                            fontSize: size.width * 0.05),
                                       ),
-                                      Container(
-                                        width: 100,
-                                        child: Text(
-                                          widget.school.address,
-                                          maxLines: 2,
-                                          //overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              fontFamily: 'ss',
-                                              fontSize: size.width * 0.03),
-                                        ),
-                                      ),
-                                      Text(
-                                        widget.school.contact,
-                                        maxLines: 2,
-                                        //overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.03),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: size.height * 0.04,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.alarm_add_rounded,
-                                        color: primaryColor,
-                                        size: size.width * 0.08,
-                                      ),
-                                      SizedBox(
-                                        height: size.height * 0.015,
-                                      ),
-                                      Text(
-                                        "Timings",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(
-                                        height: size.height * 0.03,
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -500,9 +437,9 @@ class _SchoolDetailState extends State<SchoolDetail> {
 
 Widget menu() {
   return Material(
-    color: primaryColor,
+    color: Colors.white,
     child: TabBar(
-      labelColor: Colors.white,
+      labelColor: Colors.black,
       indicatorColor: primaryColor,
       tabs: [
         Tab(
