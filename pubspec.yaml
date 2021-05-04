@@ -38,6 +38,7 @@ dependencies:
   mailer: ^3.3.0
   flutter_rating_bar: ^3.2.0+1
   url_launcher: ^5.7.10
+  carousel_slider: ^3.0.0
 
 dev_dependencies:
   flutter_test:

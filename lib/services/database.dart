@@ -36,8 +36,8 @@ class DatabaseService {
   }
 
   // Function to Add the Institute Id to User Bookmarks Array Object in FireStore.
-  Future addBookmark(String sid) async {
-    return await userCollection.document(uid).updateData({'bookmarks': sid});
+  Future addBookmark(String email) async {
+    return await userCollection.document(uid).updateData({'bookmarks': email});
   }
 
   // Function to Remove the Institute Id to User Bookmarks Array Object in FireStore.
@@ -49,12 +49,24 @@ class DatabaseService {
   List<School> _schoolListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return School(
-          sid: sid,
           name: doc.data['name'] ?? "Unknown",
           address: doc.data['address'] ?? "not present",
           contact: doc.data['contactnumber'] ?? "no contact",
           image: doc.data['image'] ?? "",
           bg: doc.data['bg'] ?? "",
+          sector: doc.data['sector'] ?? "",
+          category: doc.data['category'] ?? "",
+          openingtiming: doc.data['openingtiming'] ?? "",
+          normaltiming: doc.data['normaltiming'] ?? "",
+          fridaytiming: doc.data['fridaytiming'] ?? "",
+          webUrl: doc.data['webUrl'] ?? "",
+          location: doc.data['location'] ?? "",
+          city: doc.data['city'] ?? "",
+          province: doc.data['province'] ?? "",
+          lowerfeerange: doc.data['lowerfeerange'] ?? 2000,
+          upperfeerange: doc.data['upperfeerange'] ?? 7000,
+          feedetails: doc.data['feedetails'] ?? "",
+          curriculum: doc.data['curriculum'] ?? "",
           rating: doc.data['rating'] ?? 1.0);
     }).toList();
   }

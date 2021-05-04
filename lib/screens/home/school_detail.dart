@@ -142,7 +142,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                         color: primaryColor,
                                         iconSize: size.width * 0.08,
                                         onPressed: () {
-                                          launch('https://lgs.edu.pk/');
+                                          launch('${widget.school.webUrl}');
                                         },
                                       ),
                                       IconButton(
@@ -150,8 +150,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                         color: primaryColor,
                                         iconSize: size.width * 0.08,
                                         onPressed: () {
-                                          launch(
-                                              'https://goo.gl/maps/dX5zePoJLTKp4TzdA');
+                                          launch('${widget.school.location}');
                                         },
                                       ),
                                       IconButton(
@@ -222,41 +221,28 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                       SizedBox(
                                         height: size.height * 0.03,
                                       ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
-                                      ),
-                                      Text(
-                                        "Monday      8:00 AM - 2:00 PM",
-                                        style: TextStyle(
-                                            fontFamily: 'ss',
-                                            fontSize: size.width * 0.04),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Monday to Thursday       ${widget.school.openingtiming} AM - ${widget.school.normaltiming} PM",
+                                            style: TextStyle(
+                                                fontFamily: 'ss',
+                                                fontSize: size.width * 0.04),
+                                          ),
+                                          SizedBox(
+                                            height: size.height * 0.03,
+                                          ),
+                                          Text(
+                                            "Friday                                     ${widget.school.openingtiming} AM - ${widget.school.fridaytiming} PM",
+                                            style: TextStyle(
+                                                fontFamily: 'ss',
+                                                fontSize: size.width * 0.04),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -316,7 +302,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: size.height * 0.025,
+                                    height: size.height * 0.02,
                                   ),
                                   Align(
                                     alignment: Alignment.center,
@@ -333,24 +319,35 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                   ),
                                   Align(
                                     alignment: Alignment.center,
-                                    child: RatingBar.builder(
-                                      itemSize: size.width * 0.04,
-                                      initialRating: widget.school.rating,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.blueAccent,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                      },
+                                    child: Text(
+                                      widget.school.address +
+                                          " " +
+                                          widget.school.city +
+                                          " " +
+                                          widget.school.province,
+                                      style: TextStyle(
+                                          fontFamily: 'ss',
+                                          fontSize: size.width * 0.04,
+                                          fontWeight: FontWeight.normal),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: size.height * 0.05,
+                                    height: size.height * 0.01,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      widget.school.sector +
+                                          " " +
+                                          widget.school.category,
+                                      style: TextStyle(
+                                          fontFamily: 'ss',
+                                          fontSize: size.width * 0.04,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.03,
                                   ),
                                   Text(
                                     "Curriculum",
@@ -363,10 +360,30 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                     height: size.height * 0.015,
                                   ),
                                   Text(
-                                    "Nulla nostrud ullamco occaecat eu fugiat aliqua elit Lorem labore laboris ad consectetur. Sit exercitation dolore eu consectetur nostrud aliqua aliqua cupidatat Lorem ullamco deserunt qui anim. Ad quis consectetur officia nisi Lorem esse sint qui velit officia amet. Irure reprehenderit in dolor et eiusmod velit cupidatat laboris do.",
+                                    "${widget.school.curriculum}",
                                     style: TextStyle(
                                         fontFamily: 'ss',
                                         fontSize: size.width * 0.037,
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.015,
+                                  ),
+                                  Text(
+                                    "Fee Range",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.05),
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.015,
+                                  ),
+                                  Text(
+                                    "This School Fee Ranges from RS: ${widget.school.lowerfeerange} to RS: ${widget.school.upperfeerange} per month.",
+                                    style: TextStyle(
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.038,
                                         fontWeight: FontWeight.normal),
                                   ),
                                   SizedBox(
@@ -383,7 +400,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                     height: size.height * 0.015,
                                   ),
                                   Text(
-                                    "Nostrud nulla dolore nostrud nisi aliqua quis qui elit quis deserunt nostrud labore veniam.",
+                                    "${widget.school.feedetails}",
                                     style: TextStyle(
                                         fontFamily: 'ss',
                                         fontSize: size.width * 0.037,
@@ -395,7 +412,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                   Center(
                                     child: InkWell(
                                       onTap: () {
-                                        launch('https://lgs.edu.pk/');
+                                        launch('${widget.school.webUrl}');
                                       },
                                       child: Text(
                                         "More Deatils",

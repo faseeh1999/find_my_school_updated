@@ -1,37 +1,33 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:find_my_school_updated/models/school.dart';
-import 'package:find_my_school_updated/screens/home/school_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 
-class SchoolList extends StatefulWidget {
+class Carousel extends StatefulWidget {
   @override
-  _SchoolListState createState() => _SchoolListState();
+  _CarouselState createState() => _CarouselState();
 }
 
-class _SchoolListState extends State<SchoolList> {
+class _CarouselState extends State<Carousel> {
   List imgList = [
-    'https://talib.pk/wp-content/uploads/2017/10/The-Punjab-School-Township-Campus.jpg',
-    'https://i.pinimg.com/736x/ce/46/46/ce46467905f4eb73f0d057a0892b800d.jpg',
-    'https://www.lgsdefence.edu.pk/img/new/building.png',
-    'https://www.theonlinepoint.com/wp-content/uploads/2019/08/Multan-Public-School-and-College-for-Girlsfront.jpg',
-    'https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_1024/https://www.americanlycetuffschool.edu.pk/wp-content/uploads/2020/04/1-1024x576.png',
-    'http://dpsfsd.edu.pk/assets/drgalleries/981/thumb_Jaranwala%20Campus.jpg',
-    'https://i1.wp.com/pakistanijournal.com/wp-content/uploads/2020/05/Top-10-Best-Schools-of-Pakistan-2020-2021.jpg?fit=900%2C500&ssl=1',
-    'https://blog.graana.com/wp-content/uploads/2019/09/roots-internatonal-school.jpg',
-    'https://i.pinimg.com/originals/8d/37/28/8d372839ed92ce204b036eded4f2aecd.jpg'
+    'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1536679545597-c2e5e1946495?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+    'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
   ];
 
   @override
   Widget build(BuildContext context) {
-    final schools = Provider.of<List<School>>(context) ?? [];
+    //final schools = Provider.of<List<School>>(context) ?? [];
     Size size = MediaQuery.of(context).size;
-
-    return Column(
-      children: [
-        Container(
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Slider"),
+        ),
+        body: Container(
             color: Colors.transparent,
-            height: size.height * 0.3,
+            height: size.height * 0.4,
             width: size.width,
             child: Column(
               children: [
@@ -43,30 +39,26 @@ class _SchoolListState extends State<SchoolList> {
                   children: [
                     CarouselSlider(
                       options: CarouselOptions(
-                        aspectRatio: 16 / 9,
-                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
-                        autoPlayCurve: Curves.linearToEaseOut,
-                        height: size.height * 0.25,
+                        height: size.height * 0.3,
                         initialPage: 0,
                         autoPlay: true,
                         enableInfiniteScroll: true,
                         enlargeCenterPage: true,
-                        autoPlayInterval: Duration(seconds: 10),
-                        //autoPlayInterval: Duration(minutes: 10),
-                        autoPlayAnimationDuration: Duration(milliseconds: 2000),
+                        autoPlayInterval: Duration(seconds: 2),
+                        autoPlayAnimationDuration: Duration(milliseconds: 1500),
                       ),
                       items: imgList.map((imgUrl) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
-                              width: size.width,
+                              width: MediaQuery.of(context).size.width,
                               //margin: EdgeInsets.symmetric(horizontal: 10.0),
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                 colorFilter: new ColorFilter.mode(
                                     Colors.black.withOpacity(0.5),
                                     BlendMode.darken),
-                                fit: BoxFit.fill,
+                                fit: BoxFit.cover,
                                 image: NetworkImage(imgUrl),
                               )),
                             );
@@ -80,7 +72,7 @@ class _SchoolListState extends State<SchoolList> {
                       children: [
                         SizedBox(height: size.height * 0.02),
                         Padding(
-                          padding: const EdgeInsets.only(left: 60.0),
+                          padding: const EdgeInsets.only(left: 50.0),
                           child: Text(
                             "Find the",
                             style: TextStyle(
@@ -93,7 +85,7 @@ class _SchoolListState extends State<SchoolList> {
                         ),
                         SizedBox(height: size.height * 0.015),
                         Padding(
-                          padding: const EdgeInsets.only(left: 60.0),
+                          padding: const EdgeInsets.only(left: 50.0),
                           child: Text(
                             "Best Schools",
                             style: TextStyle(
@@ -109,18 +101,6 @@ class _SchoolListState extends State<SchoolList> {
                   ],
                 ),
               ],
-            )),
-        Expanded(
-          child: Scrollbar(
-            isAlwaysShown: false,
-            child: ListView.builder(
-                itemCount: schools.length,
-                itemBuilder: (context, index) {
-                  return SchoolTile(school: schools[index]);
-                }),
-          ),
-        ),
-      ],
-    );
+            )));
   }
 }
