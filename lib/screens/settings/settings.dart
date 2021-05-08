@@ -34,29 +34,45 @@ class SettingsScreen extends StatelessWidget {
             height: size.height * 0.25,
             width: size.width,
             color: primaryColor,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  "Final All",
-                  style: TextStyle(
-                    fontFamily: 'ss',
-                    color: Colors.white,
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Text(
+                        "Final All",
+                        style: TextStyle(
+                          fontFamily: 'ss',
+                          color: Colors.white,
+                          fontSize: size.width * 0.08,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: size.height * 0.02),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: Text(
+                        "What you need",
+                        style: TextStyle(
+                          fontFamily: 'ss',
+                          color: Colors.white,
+                          fontSize: size.width * 0.08,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20.0),
-                Text(
-                  "What you need",
-                  style: TextStyle(
-                    fontFamily: 'ss',
-                    color: Colors.white,
-                    fontSize: 35,
-                    fontWeight: FontWeight.normal,
-                  ),
-                ),
+                Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                  size: size.width * 0.2,
+                )
               ],
             ),
           ),

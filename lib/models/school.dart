@@ -19,6 +19,13 @@ class School {
   final int lowerfeerange;
   final int upperfeerange;
 
+  // Text Based Search
+  // City Based
+  // Sector
+  // Category Based
+  // Fees Range
+  // Province
+
   School({
     this.curriculum,
     this.feedetails,

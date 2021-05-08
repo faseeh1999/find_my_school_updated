@@ -16,7 +16,6 @@ class _SchoolListState extends State<SchoolList> {
     'https://www.lgsdefence.edu.pk/img/new/building.png',
     'https://www.theonlinepoint.com/wp-content/uploads/2019/08/Multan-Public-School-and-College-for-Girlsfront.jpg',
     'https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_1024/https://www.americanlycetuffschool.edu.pk/wp-content/uploads/2020/04/1-1024x576.png',
-    'http://dpsfsd.edu.pk/assets/drgalleries/981/thumb_Jaranwala%20Campus.jpg',
     'https://i1.wp.com/pakistanijournal.com/wp-content/uploads/2020/05/Top-10-Best-Schools-of-Pakistan-2020-2021.jpg?fit=900%2C500&ssl=1',
     'https://blog.graana.com/wp-content/uploads/2019/09/roots-internatonal-school.jpg',
     'https://i.pinimg.com/originals/8d/37/28/8d372839ed92ce204b036eded4f2aecd.jpg'

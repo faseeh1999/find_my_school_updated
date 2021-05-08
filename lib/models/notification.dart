@@ -1,5 +1,6 @@
 class Notifications {
-  String text;
+  String title;
+  String message;
 
-  Notifications({this.text});
+  Notifications({this.title, this.message});
 }

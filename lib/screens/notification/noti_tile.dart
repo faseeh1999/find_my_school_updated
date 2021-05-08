@@ -16,25 +16,49 @@ class _NotificationTileState extends State<NotificationTile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(top: 8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-          color: Colors.white,
-          margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-          child: ListTile(
-            leading: Icon(
-              Icons.share_rounded,
-              color: Colors.blueAccent,
+      padding: const EdgeInsets.all(6.0),
+      child: Card(
+        color: Colors.white,
+        margin: EdgeInsets.fromLTRB(18.0, 6.0, 18.0, 0.0),
+        child: Column(
+          children: [
+            ListTile(
+              leading: Icon(
+                Icons.share_rounded,
+                color: Colors.blueAccent,
+              ),
+              title: Text(
+                "${widget.notification.title}",
+                style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.04),
+              ),
+              subtitle: Text("${widget.notification.message}",
+                  style: TextStyle(
+                      fontFamily: 'ss', fontSize: size.width * 0.038)),
+              // trailing: IconButton(
+              //   icon: Icon(
+              //     Icons.delete_outline_outlined,
+              //     color: Colors.red[400],
+              //   ),
+              //   onPressed: () {},
+              // ),
             ),
-            title: Text(
-              "Test Notification",
-              style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.04),
+            SizedBox(
+              height: size.height * 0.01,
             ),
-            subtitle: Text("${widget.notification.text}",
-                style:
-                    TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
-          ),
+            Divider(),
+            FlatButton.icon(
+                onPressed: null,
+                icon:
+                    Icon(Icons.delete_outline_outlined, color: Colors.red[400]),
+                label: Text(
+                  "Delete",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'ss',
+                      fontSize: size.width * 0.04,
+                      color: Colors.red[400]),
+                ))
+          ],
         ),
       ),
     );

@@ -97,7 +97,8 @@ class DatabaseService {
   List<Notifications> _notificationListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Notifications(
-        text: doc.data['text'],
+        title: doc.data['title'],
+        message: doc.data['message'],
       );
     }).toList();
   }
