@@ -45,6 +45,11 @@ class DatabaseService {
     return await userCollection.document(uid);
   }
 
+  // Function to Remove the Notification in FireStore.
+  Future removeNotification() async {
+    return await notificationCollection.document(uid).delete();
+  }
+
   //convert Query Snapshot to School List
   List<School> _schoolListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {

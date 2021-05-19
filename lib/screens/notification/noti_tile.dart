@@ -1,4 +1,5 @@
 import 'package:find_my_school_updated/models/notification.dart';
+import 'package:find_my_school_updated/services/database.dart';
 import 'package:flutter/material.dart';
 // final Notifications notification;
 // NotificationTile({this.notification});
@@ -47,7 +48,9 @@ class _NotificationTileState extends State<NotificationTile> {
             ),
             Divider(),
             FlatButton.icon(
-                onPressed: null,
+                onPressed: () async {
+                  await DatabaseService().removeNotification();
+                },
                 icon:
                     Icon(Icons.delete_outline_outlined, color: Colors.red[400]),
                 label: Text(
