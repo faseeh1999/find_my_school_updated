@@ -1,13 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/notification.dart';
 import 'package:find_my_school_updated/models/user.dart';
 import 'package:find_my_school_updated/screens/bookmarks/test_list.dart';
-import 'package:find_my_school_updated/screens/bookmarks/test_tile.dart';
-import 'package:find_my_school_updated/screens/notification/noti_list.dart';
-import 'package:find_my_school_updated/screens/notification/noti_tile.dart';
 import 'package:find_my_school_updated/services/database.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
-import 'package:find_my_school_updated/shared/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +13,7 @@ class TestScreen extends StatefulWidget {
 
 class _TestScreenState extends State<TestScreen> {
   bool isLoading = false;
-  final Notifications n1 = Notifications(title: "Heelo", message: "Testing");
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);

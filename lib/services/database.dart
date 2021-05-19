@@ -58,7 +58,18 @@ class DatabaseService {
 
   // Function to Remove the Notification in FireStore.
   Future removeNotification() async {
-    return await notificationCollection.document(uid).delete();
+    var alertID = await userCollection
+        .document(uid)
+        .collection('alerts')
+        .limit(1)
+        .getDocuments()
+        .then((value) => value.documents.first.documentID);
+
+    return await userCollection
+        .document(uid)
+        .collection('alerts')
+        .document(alertID)
+        .delete();
   }
 
   //convert Query Snapshot to School List

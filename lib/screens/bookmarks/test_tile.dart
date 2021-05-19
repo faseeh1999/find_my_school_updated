@@ -1,5 +1,8 @@
 import 'package:find_my_school_updated/models/notification.dart';
+import 'package:find_my_school_updated/models/user.dart';
+import 'package:find_my_school_updated/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TestTile extends StatefulWidget {
   final Notifications notification;
@@ -11,7 +14,13 @@ class TestTile extends StatefulWidget {
 
 class _TestTileState extends State<TestTile> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(6.0),
@@ -38,7 +47,9 @@ class _TestTileState extends State<TestTile> {
             ),
             Divider(),
             FlatButton.icon(
-                onPressed: null,
+                onPressed: () async {
+                  await DatabaseService(uid: user.uid).removeNotification();
+                },
                 icon:
                     Icon(Icons.delete_outline_outlined, color: Colors.red[400]),
                 label: Text(
