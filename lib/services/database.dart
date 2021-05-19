@@ -2,15 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/notification.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/models/user.dart';
+import 'package:find_my_school_updated/services/auth.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 
 class DatabaseService {
   final _auth = FirebaseAuth.instance;
+
   final String sid; // for school id
   final String uid; // for user id
   DatabaseService({this.uid, this.sid});
+
+  currentUser() async {
+    FirebaseUser current = await FirebaseAuth.instance.currentUser();
+    return current.uid;
+  }
 
   // Collection References
 
@@ -26,6 +32,11 @@ class DatabaseService {
   // Notification Collection Reference
   final CollectionReference notificationCollection =
       Firestore.instance.collection('notifications');
+
+  // Alert Collection Reference
+
+  // final CollectionReference alertCollection =
+  //     Firestore.instance.collection('users').document().collection('alerts');
 
   Future updateUserDate(String name, String email, String phone) async {
     return await userCollection.document(uid).setData({
@@ -123,5 +134,14 @@ class DatabaseService {
         .document(uid)
         .snapshots()
         .map(_userDataFromDocumentSnapshot);
+  }
+
+  // Alert Stream
+  Stream<List<Notifications>> get alerts {
+    return userCollection
+        .document(uid)
+        .collection('alerts')
+        .snapshots()
+        .map(_notificationListfromSnapshot);
   }
 }

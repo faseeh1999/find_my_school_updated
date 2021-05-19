@@ -19,8 +19,8 @@ class BookmarksScreen extends StatelessWidget {
       ),
       drawer: MainDrawer(),
       body: Container(
-        width: size.width,
-        height: size.height * 0.3,
+        // width: size.width,
+        // height: size.height * 0.3,
         child: Column(
           children: [
             SizedBox(
@@ -28,52 +28,117 @@ class BookmarksScreen extends StatelessWidget {
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Card(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: size.height * 0.05,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                      ),
-                      SizedBox(
-                        height: size.height * 0.05,
-                      ),
-                      Text(
-                        "School Name",
-                        style: TextStyle(
-                            fontFamily: 'ss',
-                            fontSize: size.width * 0.05,
-                            fontWeight: FontWeight.normal),
-                      ),
-                      SizedBox(height: size.height * 0.02),
-                      RatingBar.builder(
-                        itemSize: size.width * 0.04,
-                        initialRating: 4.0, //widget.school.rating,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.blueAccent,
+                Container(
+                  width: size.width * 0.4,
+                  child: Card(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: size.height * 0.05,
                         ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      ),
-                    ],
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.05,
+                        ),
+                        Text(
+                          "School Name",
+                          style: TextStyle(
+                              fontFamily: 'ss',
+                              fontSize: size.width * 0.05,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(height: size.height * 0.02),
+                        RatingBar.builder(
+                          itemSize: size.width * 0.04,
+                          initialRating: 4.0, //widget.school.rating,
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.blueAccent,
+                          ),
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
+                        ),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                        Text(
+                          "Address",
+                          style: TextStyle(
+                              fontFamily: 'ss',
+                              fontSize: size.width * 0.04,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                      ],
+                    ),
+                    //color: Colors.blueAccent,
                   ),
-                  //color: Colors.blueAccent,
                 ),
-                Card(
-                  child: Column(
-                    children: [Text("Hola", style: TextStyle(fontSize: 22))],
+                Container(
+                  width: size.width * 0.4,
+                  child: Card(
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: size.height * 0.05,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.05,
+                        ),
+                        Text(
+                          "School Name",
+                          style: TextStyle(
+                              fontFamily: 'ss',
+                              fontSize: size.width * 0.05,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(height: size.height * 0.02),
+                        RatingBar.builder(
+                          itemSize: size.width * 0.04,
+                          initialRating: 4.0, //widget.school.rating,
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.blueAccent,
+                          ),
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
+                        ),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                        Text(
+                          "Address",
+                          style: TextStyle(
+                              fontFamily: 'ss',
+                              fontSize: size.width * 0.04,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        SizedBox(
+                          height: size.height * 0.03,
+                        ),
+                      ],
+                    ),
+                    //color: Colors.blueAccent,
                   ),
-                  color: Colors.blueAccent,
                 ),
               ],
             ),

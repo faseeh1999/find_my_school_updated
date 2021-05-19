@@ -1,3 +1,4 @@
+import 'package:find_my_school_updated/screens/bookmarks/testscree.dart';
 import 'package:find_my_school_updated/screens/home/courasel.dart';
 import 'package:find_my_school_updated/screens/starting/splash.dart';
 import 'package:find_my_school_updated/services/auth.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           primaryColor: primaryColor,
         ),
         debugShowCheckedModeBanner: false,
-        home: Splash(),
+        home: TestScreen(),
       ),
     );
   }
