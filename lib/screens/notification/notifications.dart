@@ -1,4 +1,5 @@
 import 'package:find_my_school_updated/models/notification.dart';
+import 'package:find_my_school_updated/models/user.dart';
 import 'package:find_my_school_updated/screens/notification/noti_list.dart';
 import 'package:find_my_school_updated/services/database.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
@@ -8,8 +9,9 @@ import 'package:flutter/material.dart';
 class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     return StreamProvider<List<Notifications>>.value(
-      value: DatabaseService().notification,
+      value: DatabaseService(uid: user.uid).alerts,
       child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black),

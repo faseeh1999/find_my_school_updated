@@ -114,11 +114,11 @@ class DatabaseService {
   }
 
 // Notifications  Stream
-  Stream<List<Notifications>> get notification {
-    return notificationCollection
-        .snapshots()
-        .map(_notificationListfromSnapshot);
-  }
+  // Stream<List<Notifications>> get notification {
+  //   return notificationCollection
+  //       .snapshots()
+  //       .map(_notificationListfromSnapshot);
+  // }
 
   //convert Query Snapshot to Notifications List
   List<Notifications> _notificationListfromSnapshot(QuerySnapshot snapshot) {
@@ -130,13 +130,14 @@ class DatabaseService {
     }).toList();
   }
 
-  // // Bookmarks Stream
-  // Stream<List<School>> get bookmarks {
-  //   return userCollection
-  //       .document(uid)
-  //       .snapshots()
-  //       .map(_schoolListfromSnapshot);
-  // }
+  // Bookmarks Stream
+  Stream<List<School>> get bookmarks {
+    return userCollection
+        .document(uid)
+        .collection('bookmarks')
+        .snapshots()
+        .map(_schoolListfromSnapshot);
+  }
 
   // User Data Stream
 
