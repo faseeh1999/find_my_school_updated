@@ -96,7 +96,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                     //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                         context,
                                         PageTransition(
                                             type: PageTransitionType.fade,
@@ -131,7 +131,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                     //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                         context,
                                         PageTransition(
                                             type: PageTransitionType.fade,
@@ -166,7 +166,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                     //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                         context,
                                         PageTransition(
                                             type: PageTransitionType.fade,
@@ -202,7 +202,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                     //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                     onPressed: () {
                                       Navigator.of(context).pop();
-                                      Navigator.pushReplacement(
+                                      Navigator.push(
                                         context,
                                         PageTransition(
                                             type: PageTransitionType.fade,
