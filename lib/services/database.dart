@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/notification.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/models/user.dart';
-import 'package:find_my_school_updated/services/auth.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -46,14 +45,70 @@ class DatabaseService {
     });
   }
 
-  // Function to Add the Institute Id to User Bookmarks Array Object in FireStore.
-  Future addBookmark(String email) async {
-    return await userCollection.document(uid).updateData({'bookmarks': email});
+  // Function to Check the Bookmark from the firestore.
+  Future checkBookmark(School bookmark) async {
+    if (await userCollection
+        .document(uid)
+        .collection('bookmarks')
+        .getDocuments()
+        .then((value) => value.documents.isEmpty)) {
+      return false;
+    } else {
+      bool bookmarkPresent = await userCollection
+          .document(uid)
+          .collection('bookmarks')
+          .getDocuments()
+          .then((value) {
+        if (value.documents
+            .any((element) => element.data.containsValue(bookmark.name))) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      return bookmarkPresent;
+    }
   }
 
-  // Function to Remove the Institute Id to User Bookmarks Array Object in FireStore.
-  Future removeBookmark(String sid) async {
-    return await userCollection.document(uid);
+// Function to Add the Bookmark to the firestore.
+  Future addBookmark(School bookmark) async {
+    return await userCollection.document(uid).collection('bookmarks').add({
+      "name": bookmark.name ?? "Unknown",
+      "address": bookmark.address ?? "not present",
+      "contact": bookmark.contact ?? "no contact",
+      "image": bookmark.image ?? "",
+      "bg": bookmark.bg ?? "",
+      "sector": bookmark.sector ?? "",
+      "category": bookmark.category ?? "",
+      "openingtiming": bookmark.openingtiming ?? "",
+      "normaltiming": bookmark.normaltiming ?? "",
+      "fridaytiming": bookmark.fridaytiming ?? "",
+      "webUrl": bookmark.webUrl ?? "",
+      "location": bookmark.location ?? "",
+      "city": bookmark.city ?? "",
+      "province": bookmark.province ?? "",
+      "lowerfeerange": bookmark.lowerfeerange ?? 2000,
+      "upperfeerange": bookmark.upperfeerange ?? 7000,
+      "feedetails": bookmark.feedetails ?? "",
+      "curriculum": bookmark.curriculum ?? "",
+      "rating": bookmark.rating ?? 1.0
+    });
+  }
+
+  // Function to Remove the Bookmark from the firestore.
+  Future removeBookmark(School bookmark) async {
+    String bookmarkID = await userCollection
+        .document(uid)
+        .collection('bookmarks')
+        .limit(1)
+        .getDocuments()
+        .then((value) => value.documents.first.documentID);
+
+    return await userCollection
+        .document(uid)
+        .collection('bookmarks')
+        .document(bookmarkID)
+        .delete();
   }
 
   // Function to Remove the Notification in FireStore.

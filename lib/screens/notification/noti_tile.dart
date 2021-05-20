@@ -2,9 +2,8 @@ import 'package:find_my_school_updated/models/notification.dart';
 import 'package:find_my_school_updated/models/user.dart';
 import 'package:find_my_school_updated/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-// final Notifications notification;
-// NotificationTile({this.notification});
 
 class NotificationTile extends StatefulWidget {
   final Notifications notification;
@@ -52,7 +51,18 @@ class _NotificationTileState extends State<NotificationTile> {
             Divider(),
             FlatButton.icon(
                 onPressed: () async {
-                  await DatabaseService(uid: user.uid).removeNotification();
+                  await DatabaseService(uid: user.uid)
+                      .removeNotification()
+                      .whenComplete(() => {
+                            Fluttertoast.showToast(
+                                msg: "Notification Cleared.",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.black,
+                                textColor: Colors.white,
+                                fontSize: 16.0)
+                          });
                 },
                 icon:
                     Icon(Icons.delete_outline_outlined, color: Colors.red[400]),

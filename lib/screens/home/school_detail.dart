@@ -1,7 +1,11 @@
 import 'package:find_my_school_updated/models/school.dart';
+import 'package:find_my_school_updated/models/user.dart';
+import 'package:find_my_school_updated/services/database.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SchoolDetail extends StatefulWidget {
@@ -12,23 +16,34 @@ class SchoolDetail extends StatefulWidget {
 }
 
 class _SchoolDetailState extends State<SchoolDetail> {
+  bool isBookmarked = false;
+  Icon favIcon = Icon(
+    Icons.favorite_border_outlined,
+    color: primaryColor,
+  );
+  Icon favIconFilled = Icon(
+    Icons.favorite,
+    color: primaryColor,
+  );
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final user = Provider.of<User>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.white),
             elevation: 0.0,
-            backgroundColor: Colors.white,
+            backgroundColor: primaryColor,
             centerTitle: true,
             title: Text(
               "School Detials",
               style: TextStyle(
                   fontFamily: 'ss',
                   fontSize: size.width * 0.05,
-                  color: Colors.black),
+                  color: Colors.white),
             ),
           ),
           bottomNavigationBar: menu(),
@@ -42,7 +57,6 @@ class _SchoolDetailState extends State<SchoolDetail> {
                     Container(
                       height: size.height * 0.3,
                       width: size.width,
-
                       decoration: BoxDecoration(
                           color: Colors.blueAccent,
                           image: DecorationImage(
@@ -52,19 +66,6 @@ class _SchoolDetailState extends State<SchoolDetail> {
                             fit: BoxFit.cover,
                             image: NetworkImage(widget.school.bg),
                           )),
-                      //color: primaryColor,
-                      // child: Padding(
-                      //   padding: const EdgeInsets.all(60.0),
-                      //   child: Text(
-                      //     widget.school.name,
-                      //     style: TextStyle(
-                      //       fontFamily: 'ss',
-                      //       color: Colors.white,
-                      //       fontSize: 25,
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   ),
-                      // ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 50.0),
@@ -94,12 +95,52 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                         radius: size.width * 0.08,
                                       ),
                                       IconButton(
-                                          icon: Icon(
-                                            Icons.favorite_border_outlined,
-                                            color: primaryColor,
-                                            size: size.width * 0.08,
-                                          ),
-                                          onPressed: null)
+                                          icon: isBookmarked
+                                              ? favIconFilled
+                                              : favIcon,
+                                          onPressed: () async {
+                                            setState(() {
+                                              isBookmarked = true;
+                                            });
+
+                                            bool status = await DatabaseService(
+                                                    uid: user.uid)
+                                                .checkBookmark(widget.school);
+                                            if (status) {
+                                              Fluttertoast.showToast(
+                                                  msg:
+                                                      "Bookmark Already Present.",
+                                                  toastLength:
+                                                      Toast.LENGTH_LONG,
+                                                  gravity: ToastGravity.BOTTOM,
+                                                  timeInSecForIosWeb: 1,
+                                                  backgroundColor: Colors.black,
+                                                  textColor: Colors.white,
+                                                  fontSize: 16.0);
+                                            } else if (status == false ||
+                                                status == null) {
+                                              await DatabaseService(
+                                                      uid: user.uid)
+                                                  .addBookmark(widget.school)
+                                                  .whenComplete(() => {
+                                                        Fluttertoast.showToast(
+                                                            msg:
+                                                                "Bookmark has been Added.",
+                                                            toastLength: Toast
+                                                                .LENGTH_LONG,
+                                                            gravity:
+                                                                ToastGravity
+                                                                    .BOTTOM,
+                                                            timeInSecForIosWeb:
+                                                                1,
+                                                            backgroundColor:
+                                                                Colors.black,
+                                                            textColor:
+                                                                Colors.white,
+                                                            fontSize: 16.0),
+                                                      });
+                                            }
+                                          })
                                     ],
                                   ),
                                   SizedBox(
@@ -454,9 +495,9 @@ class _SchoolDetailState extends State<SchoolDetail> {
 
 Widget menu() {
   return Material(
-    color: Colors.white,
+    color: primaryColor,
     child: TabBar(
-      labelColor: Colors.black,
+      labelColor: Colors.white,
       indicatorColor: primaryColor,
       tabs: [
         Tab(
