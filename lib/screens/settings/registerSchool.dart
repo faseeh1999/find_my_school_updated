@@ -28,6 +28,11 @@ class _RegisterSchoolState extends State<RegisterSchool> {
       ValidationBuilder().required().email().maxLength(50).build();
   final validateSchoolAddress =
       ValidationBuilder().required().maxLength(100).build();
+  final validateSchoolCity = ValidationBuilder().required();
+  final validateCurriculum =
+      ValidationBuilder().minLength(50).maxLength(300).required().build();
+  final validateFeeDetails =
+      ValidationBuilder().minLength(50).maxLength(250).required().build();
 //Strings for Form Fields
   String schoolName;
   String schoolEmail;
@@ -46,6 +51,26 @@ class _RegisterSchoolState extends State<RegisterSchool> {
   String schoolFridaytiming;
   String schoolWebUrl;
 
+  List cityList = [
+    'Lahore',
+    'Karachi',
+    'Islamabad',
+    'Peshawar',
+    'Quetta',
+    'Multan',
+    'Faisalabad',
+    'Sialkot',
+    'Gujranwala',
+    'Larkana',
+    'Hyderabad',
+    'Rawalpindi',
+    'Abbotabad',
+    'Mingora',
+    'Mardan'
+  ];
+  List provinceList = ['Punjab', 'Sindh', 'KPK', 'Balochistan', 'Azad Kashmir'];
+  List sectorList = ['Public', 'Private', 'Semi-Government'];
+  List categoryList = ['Matriculation', 'O/A Levels', 'Matric & O/A Levels'];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -113,13 +138,14 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                 child: Column(
                   children: [
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.always,
+                      validator: (val) =>
+                          val == null ? "Enter School Name" : null,
                       onChanged: (val) {
                         setState(() {
                           schoolName = val;
                         });
                       },
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: validateSchoolName,
                       decoration: InputDecoration(
                           labelText: "School Name",
                           border: OutlineInputBorder()),
@@ -163,129 +189,119 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            DropdownButton<String>(
-                              value: schoolCity,
-                              hint: Text(
-                                "City",
-                                style: TextStyle(fontFamily: 'ss'),
-                                textAlign: TextAlign.center,
-                              ),
-                              items: <String>[
-                                // 'A', 'B', 'C', 'D'
-                                'Lahore',
-                                'Karachi',
-                                'Islamabad',
-                                'Multan',
-                                'Peshawar',
-                                'Rawalpindi',
-                                'Faisalabad',
-                                'Quetta',
-                                'Gujranwala',
-                                'Sargodha',
-                                'Sialkot',
-                                'Hyderabad',
-                                'Sukkur',
-                                'Larkana',
-                                'Mardan',
-                                'Abbottabad',
-                                'Kohat'
-                              ].map((String value) {
-                                return new DropdownMenuItem<String>(
+                        DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                labelText: "Choose City",
+                                border: OutlineInputBorder()),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (val) =>
+                                val == null ? "Choose City" : null,
+                            isExpanded: true,
+                            dropdownColor: Colors.white,
+                            value: schoolCity,
+                            items: cityList.map((value) {
+                              return new DropdownMenuItem(
                                   value: value,
-                                  child: new Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  schoolCity = value;
-                                  print(schoolCity);
-                                });
-                              },
-                            ),
-                            DropdownButton<String>(
-                              value: schoolProvince,
-                              hint: Text("Province"),
-                              items: <String>[
-                                // 'A', 'B', 'C', 'D'
-                                'Punjab',
-                                'Sindh',
-                                'KPK',
-                                'Balochistan',
-                                'Azad Kashmir'
-                              ].map((String value) {
-                                return new DropdownMenuItem<String>(
-                                  value: value,
-                                  child: new Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  schoolProvince = value;
-                                  print(schoolProvince);
-                                });
-                              },
-                            ),
-                          ],
-                        ),
+                                  child: new Text(
+                                    value,
+                                    style: TextStyle(
+                                        color: Colors.black, fontFamily: 'ss'),
+                                  ));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                schoolCity = value;
+                              });
+                            }),
                         SizedBox(
-                          height: size.height * 0.01,
+                          height: size.height * 0.02,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            DropdownButton<String>(
-                              focusColor: primaryColor,
-                              value: schoolSector,
-                              hint: Text("Sector"),
-                              items: <String>[
-                                // 'A', 'B', 'C', 'D'
-                                'Public',
-                                'Private',
-                                'Semi-Government',
-                              ].map((String value) {
-                                return new DropdownMenuItem<String>(
+                        DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                labelText: "Choose Province",
+                                border: OutlineInputBorder()),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (val) =>
+                                val == null ? "Choose Province" : null,
+                            isExpanded: true,
+                            dropdownColor: Colors.white,
+                            value: schoolProvince,
+                            items: provinceList.map((value) {
+                              return new DropdownMenuItem(
                                   value: value,
-                                  child: new Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  schoolSector = value;
-                                  print(schoolSector);
-                                });
-                              },
-                            ),
-                            DropdownButton<String>(
-                              value: schoolCategory,
-                              hint: Text("Category"),
-                              items: <String>[
-                                // 'A', 'B', 'C', 'D'
-                                'Matriculation',
-                                'O/A Levels',
-                                'Matric & O/A Levers',
-                                'Madrissa'
-                              ].map((String value) {
-                                return new DropdownMenuItem<String>(
+                                  child: new Text(
+                                    value,
+                                    style: TextStyle(
+                                        color: Colors.black, fontFamily: 'ss'),
+                                  ));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                schoolProvince = value;
+                              });
+                            }),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                labelText: "Choose Sector",
+                                border: OutlineInputBorder()),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (val) =>
+                                val == null ? "Choose Sector" : null,
+                            isExpanded: true,
+                            dropdownColor: Colors.white,
+                            value: schoolSector,
+                            items: sectorList.map((value) {
+                              return new DropdownMenuItem(
                                   value: value,
-                                  child: new Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  schoolCategory = value;
-                                  print(schoolCategory);
-                                });
-                              },
-                            ),
-                          ],
-                        )
+                                  child: new Text(
+                                    value,
+                                    style: TextStyle(
+                                        color: Colors.black, fontFamily: 'ss'),
+                                  ));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                schoolSector = value;
+                              });
+                            }),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                labelText: "Choose Category",
+                                border: OutlineInputBorder()),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (val) =>
+                                val == null ? "Choose Category" : null,
+                            isExpanded: true,
+                            dropdownColor: Colors.white,
+                            value: schoolCategory,
+                            items: categoryList.map((value) {
+                              return new DropdownMenuItem(
+                                  value: value,
+                                  child: new Text(
+                                    value,
+                                    style: TextStyle(
+                                        color: Colors.black, fontFamily: 'ss'),
+                                  ));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                schoolCategory = value;
+                              });
+                            }),
                       ],
                     ),
                     SizedBox(
-                      height: size.height * 0.03,
+                      height: size.height * 0.02,
                     ),
                     TextFormField(
                       onChanged: (val) {
@@ -296,7 +312,54 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: validateSchoolPhone,
                       decoration: InputDecoration(
-                          labelText: "School Website or Facebook Page",
+                          labelText: "School Location Google Maps URL",
+                          border: OutlineInputBorder()),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    TextFormField(
+                      onChanged: (val) {
+                        setState(() {
+                          schoolPhone = val;
+                        });
+                      },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: validateSchoolPhone,
+                      decoration: InputDecoration(
+                          labelText: "School Website or Facebook Page URL",
+                          border: OutlineInputBorder()),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    TextFormField(
+                      onChanged: (val) {
+                        schoolCurriculum = val;
+                      },
+                      keyboardType: TextInputType.text,
+                      maxLines: 7,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      validator: validateCurriculum,
+                      decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          labelText: "School Curriculum",
+                          border: OutlineInputBorder()),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    TextFormField(
+                      onChanged: (val) {
+                        schoolCurriculum = val;
+                      },
+                      keyboardType: TextInputType.text,
+                      maxLines: 5,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      validator: validateFeeDetails,
+                      decoration: InputDecoration(
+                          alignLabelWithHint: true,
+                          labelText: "School Fee Details",
                           border: OutlineInputBorder()),
                     ),
                     SizedBox(
@@ -416,11 +479,11 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                           borderRadius:
                               BorderRadius.all(Radius.circular(18.0))),
                       label: Text(
-                        'Update Account',
+                        'Register School',
                         style: ButtonTextStyle,
                       ),
                       icon: Icon(
-                        Icons.done_all_outlined,
+                        Icons.add_circle_outline_outlined,
                         color: Colors.white,
                       ),
                       textColor: Colors.white,
