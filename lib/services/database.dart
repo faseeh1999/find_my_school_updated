@@ -28,6 +28,9 @@ class DatabaseService {
   final CollectionReference schoolCollection =
       Firestore.instance.collection('institutes');
 
+  final CollectionReference schoolRequestCollection =
+      Firestore.instance.collection('requests');
+
   // Notification Collection Reference
   final CollectionReference notificationCollection =
       Firestore.instance.collection('notifications');
@@ -68,6 +71,50 @@ class DatabaseService {
       });
       return bookmarkPresent;
     }
+  }
+
+  Future addSchoolRequesut(
+    String schoolName,
+    String schoolAddress,
+    String schoolPhone,
+    String schoolCity,
+    String schoolProvince,
+    String schoolSector,
+    String schoolCategory,
+    String schoolLocation,
+    String schoolCurriculum,
+    String schoolfeeDetails,
+    int schoolLowerFeeRange,
+    int schoolUpperFeeRange,
+    String schoolOpeningtiming,
+    String schoolNormaltiming,
+    String schoolFridaytiming,
+    String schoolWebUrl,
+    String schoolLogo,
+    String schoolImage,
+    double schoolRating,
+  ) async {
+    return await schoolRequestCollection.add({
+      "name": schoolName ?? "Unknown",
+      "address": schoolAddress ?? "not present",
+      "contact": schoolPhone ?? "no contact",
+      "image": schoolLogo ?? "",
+      "bg": schoolImage ?? "",
+      "sector": schoolSector ?? "",
+      "category": schoolCategory ?? "",
+      "openingtiming": schoolOpeningtiming ?? "",
+      "normaltiming": schoolNormaltiming ?? "",
+      "fridaytiming": schoolFridaytiming ?? "",
+      "webUrl": schoolWebUrl ?? "",
+      "location": schoolLocation ?? "",
+      "city": schoolCity ?? "",
+      "province": schoolProvince ?? "",
+      "lowerfeerange": schoolLowerFeeRange ?? 2000,
+      "upperfeerange": schoolUpperFeeRange ?? 7000,
+      "feedetails": schoolfeeDetails ?? "",
+      "curriculum": schoolCurriculum ?? "",
+      "rating": schoolRating ?? 4.0
+    });
   }
 
 // Function to Add the Bookmark to the firestore.

@@ -1,7 +1,13 @@
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:find_my_school_updated/theme/text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_validator/form_validator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:find_my_school_updated/services/database.dart';
 
 class RegisterSchool extends StatefulWidget {
   @override
@@ -10,6 +16,7 @@ class RegisterSchool extends StatefulWidget {
 
 class _RegisterSchoolState extends State<RegisterSchool> {
   GlobalKey<FormState> _form = GlobalKey();
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   // Function to Validate Form State
   bool _validate() {
     return _form.currentState.validate();
@@ -24,8 +31,6 @@ class _RegisterSchoolState extends State<RegisterSchool> {
       .maxLength(11)
       .minLength(11)
       .build();
-  final validateSchoolEmail =
-      ValidationBuilder().required().email().maxLength(50).build();
   final validateSchoolAddress =
       ValidationBuilder().required().maxLength(100).build();
   final validateSchoolCity = ValidationBuilder().required();
@@ -33,9 +38,12 @@ class _RegisterSchoolState extends State<RegisterSchool> {
       ValidationBuilder().minLength(50).maxLength(300).required().build();
   final validateFeeDetails =
       ValidationBuilder().minLength(50).maxLength(250).required().build();
+
+  final validateLocation = ValidationBuilder().required().url().build();
+  final validateWebURL = ValidationBuilder().required().url().build();
 //Strings for Form Fields
   String schoolName;
-  String schoolEmail;
+  String schoolAddress;
   String schoolPhone;
   String schoolCity;
   String schoolProvince;
@@ -50,6 +58,9 @@ class _RegisterSchoolState extends State<RegisterSchool> {
   String schoolNormaltiming;
   String schoolFridaytiming;
   String schoolWebUrl;
+  String schoolLogo;
+  String schoolImage;
+  double schoolRating;
 
   List cityList = [
     'Lahore',
@@ -71,10 +82,135 @@ class _RegisterSchoolState extends State<RegisterSchool> {
   List provinceList = ['Punjab', 'Sindh', 'KPK', 'Balochistan', 'Azad Kashmir'];
   List sectorList = ['Public', 'Private', 'Semi-Government'];
   List categoryList = ['Matriculation', 'O/A Levels', 'Matric & O/A Levels'];
+  List lowerFee = [1000, 1500, 2000, 2500, 2700, 3000];
+  List upperFee = [
+    3500,
+    4000,
+    5000,
+    6000,
+    7000,
+    8000,
+    9000,
+    10000,
+    12000,
+    15000,
+    20000
+  ];
+
+  TimeOfDay openTime;
+  TimeOfDay closeTime;
+  TimeOfDay fridayTime;
+  TimeOfDay selectedTime;
+
+  bool timeSelected = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    openTime = TimeOfDay.now();
+    closeTime = TimeOfDay.now();
+    fridayTime = TimeOfDay.now();
+  }
+
+  Future<Null> selectOpenTime(BuildContext context) async {
+    selectedTime = await showTimePicker(
+        context: context, initialTime: new TimeOfDay(hour: 8, minute: 00));
+    if (selectedTime != null) {
+      setState(() {
+        openTime = selectedTime;
+        timeSelected = true;
+      });
+    }
+  }
+
+  Future<Null> selectCloseTime(BuildContext context) async {
+    setState(() {
+      selectedTime = null;
+    });
+    selectedTime = await showTimePicker(
+        context: context, initialTime: new TimeOfDay(hour: 13, minute: 00));
+    if (selectedTime != null) {
+      setState(() {
+        closeTime = selectedTime;
+        timeSelected = true;
+      });
+    }
+  }
+
+  Future<Null> selectFridayTime(BuildContext context) async {
+    setState(() {
+      selectedTime = null;
+    });
+    selectedTime = await showTimePicker(
+        context: context, initialTime: new TimeOfDay(hour: 12, minute: 30));
+    if (selectedTime != null) {
+      setState(() {
+        fridayTime = selectedTime;
+        timeSelected = true;
+      });
+    }
+  }
+
+  File _imageLogo;
+  File _imageSchool;
   @override
   Widget build(BuildContext context) {
+    Future getLogoImage() async {
+      var imageLogo = await ImagePicker().getImage(source: ImageSource.gallery);
+      setState(() {
+        _imageLogo = File(imageLogo.path);
+      });
+    }
+
+    Future getSchoolImage() async {
+      var imageSchool =
+          await ImagePicker().getImage(source: ImageSource.gallery);
+      setState(() {
+        _imageSchool = File(imageSchool.path);
+      });
+    }
+
+    Future uploadLogoImage(BuildContext context) async {
+      String fileName = basename(_imageLogo.path);
+      StorageReference storageReference =
+          FirebaseStorage.instance.ref().child(fileName);
+      StorageUploadTask uploadTask = storageReference.putFile(_imageLogo);
+      StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+
+      setState(() {
+        print("Logo has been Uploaded");
+        storageReference
+            .getDownloadURL()
+            .then((value) => {schoolLogo = value.toString()});
+        print(schoolLogo);
+      });
+    }
+
+    Future uploadSchoolImage(BuildContext context) async {
+      String fileName = basename(_imageSchool.path);
+      StorageReference storageReference =
+          FirebaseStorage.instance.ref().child(fileName);
+      StorageUploadTask uploadTask = storageReference.putFile(_imageSchool);
+      StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+      setState(() {
+        print("School Image has been Uploaded");
+        storageReference
+            .getDownloadURL()
+            .then((value) => {schoolImage = value.toString()});
+        //schoolImage = storageReference.getDownloadURL().toString();
+        print(schoolImage);
+      });
+    }
+
+    final localizations = MaterialLocalizations.of(context);
+
+    String formattedOpenTime = localizations.formatTimeOfDay(openTime);
+    String formattedCloseTime = localizations.formatTimeOfDay(closeTime);
+    String formattedFridayTime = localizations.formatTimeOfDay(fridayTime);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _globalKey,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white,
@@ -108,7 +244,7 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                Icons.person_outline_outlined,
+                FontAwesomeIcons.university,
                 color: iconColor,
                 size: 50.0,
               ),
@@ -152,14 +288,6 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     ),
                     SizedBox(height: size.height * 0.02),
                     TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: validateSchoolEmail,
-                      decoration: InputDecoration(
-                          labelText: "School Email",
-                          border: OutlineInputBorder()),
-                    ),
-                    SizedBox(height: size.height * 0.02),
-                    TextFormField(
                       onChanged: (val) {
                         setState(() {
                           schoolPhone = val;
@@ -175,11 +303,11 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     TextFormField(
                       onChanged: (val) {
                         setState(() {
-                          schoolPhone = val;
+                          schoolAddress = val;
                         });
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: validateSchoolPhone,
+                      validator: validateSchoolAddress,
                       decoration: InputDecoration(
                           labelText: "School Address",
                           border: OutlineInputBorder()),
@@ -298,6 +426,62 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                                 schoolCategory = value;
                               });
                             }),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                labelText: "Choose Lower Fee Range",
+                                border: OutlineInputBorder()),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (val) =>
+                                val == null ? "Choose Lower Fee Range" : null,
+                            isExpanded: true,
+                            dropdownColor: Colors.white,
+                            value: schoolLowerFeeRange,
+                            items: lowerFee.map((value) {
+                              return new DropdownMenuItem(
+                                  value: value,
+                                  child: new Text(
+                                    value.toString(),
+                                    style: TextStyle(
+                                        color: Colors.black, fontFamily: 'ss'),
+                                  ));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                schoolLowerFeeRange = value;
+                              });
+                            }),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        DropdownButtonFormField(
+                            decoration: InputDecoration(
+                                labelText: "Choose Upper Fee Range",
+                                border: OutlineInputBorder()),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (val) =>
+                                val == null ? "Choose Upper Fee Range" : null,
+                            isExpanded: true,
+                            dropdownColor: Colors.white,
+                            value: schoolUpperFeeRange,
+                            items: upperFee.map((value) {
+                              return new DropdownMenuItem(
+                                  value: value,
+                                  child: new Text(
+                                    value.toString(),
+                                    style: TextStyle(
+                                        color: Colors.black, fontFamily: 'ss'),
+                                  ));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                schoolUpperFeeRange = value;
+                              });
+                            }),
                       ],
                     ),
                     SizedBox(
@@ -306,11 +490,11 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     TextFormField(
                       onChanged: (val) {
                         setState(() {
-                          schoolPhone = val;
+                          schoolLocation = val;
                         });
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: validateSchoolPhone,
+                      validator: validateLocation,
                       decoration: InputDecoration(
                           labelText: "School Location Google Maps URL",
                           border: OutlineInputBorder()),
@@ -321,14 +505,85 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     TextFormField(
                       onChanged: (val) {
                         setState(() {
-                          schoolPhone = val;
+                          schoolWebUrl = val;
                         });
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: validateSchoolPhone,
+                      validator: validateWebURL,
                       decoration: InputDecoration(
                           labelText: "School Website or Facebook Page URL",
                           border: OutlineInputBorder()),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Container(
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: FlatButton.icon(
+                          onPressed: () async {
+                            await getLogoImage();
+                          },
+                          icon: Icon(
+                            FontAwesomeIcons.image,
+                            color: Colors.black,
+                            size: size.width * 0.06,
+                          ),
+                          label: Text(
+                            "Add School Logo",
+                            style: TextStyle(
+                                fontFamily: 'ss',
+                                color: Colors.black,
+                                fontSize: size.width * 0.05),
+                          )),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Container(
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: FlatButton.icon(
+                          onPressed: () async {
+                            await getSchoolImage();
+                          },
+                          icon: Icon(
+                            FontAwesomeIcons.image,
+                            color: Colors.black,
+                            size: size.width * 0.06,
+                          ),
+                          label: Text(
+                            "Add School Picture",
+                            style: TextStyle(
+                                fontFamily: 'ss',
+                                color: Colors.black,
+                                fontSize: size.width * 0.05),
+                          )),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    FlatButton.icon(
+                      icon: Icon(FontAwesomeIcons.upload),
+                      label: Text("Upload Images"),
+                      onPressed: () {
+                        uploadLogoImage(context).whenComplete(() {
+                          _globalKey.currentState.showSnackBar(SnackBar(
+                            content: Text("Logo Uploaded"),
+                          ));
+                        });
+                        uploadSchoolImage(context).whenComplete(() {
+                          _globalKey.currentState.showSnackBar(SnackBar(
+                            content: Text("School Image Uploaded"),
+                          ));
+                        });
+                      },
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -351,7 +606,7 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     ),
                     TextFormField(
                       onChanged: (val) {
-                        schoolCurriculum = val;
+                        schoolfeeDetails = val;
                       },
                       keyboardType: TextInputType.text,
                       maxLines: 5,
@@ -365,6 +620,94 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     SizedBox(
                       height: size.height * 0.03,
                     ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          FlatButton.icon(
+                              onPressed: () async {
+                                await selectOpenTime(context);
+                                print(openTime);
+                                setState(() {
+                                  schoolOpeningtiming = formattedOpenTime;
+                                });
+                              },
+                              icon: Icon(FontAwesomeIcons.clock),
+                              label: timeSelected
+                                  ? Text(
+                                      '$formattedOpenTime',
+                                      // 'Time ${openTime.hour} : ${openTime.minute}',
+                                      style: TextStyle(
+                                          fontFamily: 'ss',
+                                          fontSize: size.width * 0.05),
+                                    )
+                                  : Text(
+                                      "Opening Timing",
+                                      style: TextStyle(
+                                          fontFamily: 'ss',
+                                          fontSize: size.width * 0.05),
+                                    )),
+                          FlatButton.icon(
+                              onPressed: () async {
+                                await selectCloseTime(context);
+                                print(closeTime);
+                                setState(() {
+                                  schoolNormaltiming = formattedCloseTime;
+                                });
+                              },
+                              icon: Icon(FontAwesomeIcons.clock),
+                              label: timeSelected
+                                  ? Text(
+                                      '$formattedCloseTime',
+                                      // 'Time ${openTime.hour} : ${openTime.minute}',
+                                      style: TextStyle(
+                                          fontFamily: 'ss',
+                                          fontSize: size.width * 0.05),
+                                    )
+                                  : Text(
+                                      "Closing Timing",
+                                      style: TextStyle(
+                                          fontFamily: 'ss',
+                                          fontSize: size.width * 0.05),
+                                    )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlatButton.icon(
+                            onPressed: () async {
+                              await selectFridayTime(context);
+                              print(fridayTime);
+                              setState(() {
+                                schoolFridaytiming = formattedFridayTime;
+                              });
+                            },
+                            icon: Icon(FontAwesomeIcons.clock),
+                            label: timeSelected
+                                ? Text(
+                                    '$formattedFridayTime',
+                                    // 'Time ${openTime.hour} : ${openTime.minute}',
+                                    style: TextStyle(
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.05),
+                                  )
+                                : Text(
+                                    "Friday Timing",
+                                    style: TextStyle(
+                                        fontFamily: 'ss',
+                                        fontSize: size.width * 0.05),
+                                  )),
+                      ],
+                    ),
+                    SizedBox(
+                      height: size.height * 0.02,
+                    ),
                     RaisedButton.icon(
                       elevation: 3.0,
                       onPressed: () {
@@ -376,8 +719,10 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                             onPressed: () {
                               Navigator.of(context).pop();
                               setState(() {
+                                schoolImage = "";
+                                schoolLogo = "";
                                 schoolName = "";
-                                schoolEmail = "";
+                                schoolAddress = "";
                                 schoolPhone = "";
                                 schoolCity = "";
                                 schoolProvince = "";
@@ -392,15 +737,16 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                                 schoolWebUrl = "";
                                 schoolLowerFeeRange = 0;
                                 schoolUpperFeeRange = 0;
+                                schoolRating = 4.0;
                               });
                               Navigator.pop(context);
                             },
                           );
                           // set up the Ok Dialog
                           AlertDialog okAlert = AlertDialog(
-                            title: Text("Information Updated"),
+                            title: Text("Request Received"),
                             content: Text(
-                                "Your New Account Iinfomation has been Updated."),
+                                "Your School will be added to the App, after verificaition from our team."),
                             actions: [
                               confirmButton,
                             ],
@@ -408,11 +754,38 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                           Widget okButton = FlatButton(
                             child: Text("OK"),
                             onPressed: () async {
-                              // Navigator.of(context).pop();
+                              Navigator.of(context).pop();
                               // setState(() {
                               //   isLoading = true;
                               // });
-                              // await DatabaseService(uid: user.uid)
+                              await DatabaseService()
+                                  .addSchoolRequesut(
+                                      schoolName,
+                                      schoolAddress,
+                                      schoolPhone,
+                                      schoolCity,
+                                      schoolProvince,
+                                      schoolSector,
+                                      schoolCategory,
+                                      schoolLocation,
+                                      schoolCurriculum,
+                                      schoolfeeDetails,
+                                      schoolLowerFeeRange,
+                                      schoolUpperFeeRange,
+                                      schoolOpeningtiming,
+                                      schoolNormaltiming,
+                                      schoolFridaytiming,
+                                      schoolWebUrl,
+                                      schoolLogo,
+                                      schoolImage,
+                                      schoolRating)
+                                  .whenComplete(() => {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return okAlert;
+                                            })
+                                      });
                               //     .updateUserDate(
                               //         name ?? userData.name,
                               //         email ?? userData.email,
@@ -435,32 +808,35 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                             child: Text("Cancel"),
                             onPressed: () {
                               Navigator.of(context).pop();
-                              setState(() {
-                                schoolName = "";
-                                schoolEmail = "";
-                                schoolPhone = "";
-                                schoolCity = "";
-                                schoolProvince = "";
-                                schoolSector = "";
-                                schoolCategory = "";
-                                schoolCurriculum = "";
-                                schoolfeeDetails = "";
-                                schoolFridaytiming = "";
-                                schoolOpeningtiming = "";
-                                schoolNormaltiming = "";
-                                schoolLocation = "";
-                                schoolWebUrl = "";
-                                schoolLowerFeeRange = 0;
-                                schoolUpperFeeRange = 0;
-                              });
+                              // setState(() {
+                              //   schoolImage = "";
+                              //   schoolLogo = "";
+                              //   schoolName = "";
+                              //   schoolAddress = "";
+                              //   schoolPhone = "";
+                              //   schoolCity = "";
+                              //   schoolProvince = "";
+                              //   schoolSector = "";
+                              //   schoolCategory = "";
+                              //   schoolCurriculum = "";
+                              //   schoolfeeDetails = "";
+                              //   schoolFridaytiming = "";
+                              //   schoolOpeningtiming = "";
+                              //   schoolNormaltiming = "";
+                              //   schoolLocation = "";
+                              //   schoolWebUrl = "";
+                              //   schoolLowerFeeRange = 0;
+                              //   schoolUpperFeeRange = 0;
+                              //   schoolRating = 4.0;
+                              // });
                             },
                           );
 
                           // set up the AlertDialog to Confrim Changes
                           AlertDialog confirmAlert = AlertDialog(
-                            title: Text("Confirm Changes"),
+                            title: Text("Confirm Register"),
                             content: Text(
-                                "Are you sure you want to update your account?"),
+                                "Are you sure you want to register school with these details?"),
                             actions: [
                               cancelButton,
                               okButton,
@@ -480,11 +856,13 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                               BorderRadius.all(Radius.circular(18.0))),
                       label: Text(
                         'Register School',
-                        style: ButtonTextStyle,
+                        style: ButtonTextStyle.copyWith(
+                            fontSize: size.width * 0.05),
                       ),
                       icon: Icon(
-                        Icons.add_circle_outline_outlined,
+                        FontAwesomeIcons.plusCircle,
                         color: Colors.white,
+                        size: size.width * 0.05,
                       ),
                       textColor: Colors.white,
                       splashColor: Colors.blueAccent,
