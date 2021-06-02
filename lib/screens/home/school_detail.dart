@@ -157,6 +157,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                     height: size.height * 0.02,
                                   ),
                                   RatingBar.builder(
+                                    ignoreGestures: true,
                                     itemSize: size.width * 0.04,
                                     initialRating: widget.school.rating,
                                     minRating: 1,

@@ -47,7 +47,7 @@ class SettingsScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
-                          "Final All",
+                          "Find All",
                           style: TextStyle(
                             fontFamily: 'ss',
                             color: Colors.white,

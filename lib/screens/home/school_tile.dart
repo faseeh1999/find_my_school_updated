@@ -73,6 +73,7 @@ class _SchoolTileState extends State<SchoolTile> {
           subtitle: Text("${widget.school.address}",
               style: TextStyle(fontFamily: 'ss', fontSize: size.width * 0.038)),
           trailing: RatingBar.builder(
+            ignoreGestures: true,
             itemSize: size.width * 0.04,
             initialRating: widget.school.rating,
             minRating: 1,
