@@ -3,6 +3,7 @@ import 'package:find_my_school_updated/screens/settings/account.dart';
 import 'package:find_my_school_updated/screens/settings/changePassword.dart';
 import 'package:find_my_school_updated/screens/settings/contact.dart';
 import 'package:find_my_school_updated/screens/settings/privacy.dart';
+import 'package:find_my_school_updated/screens/settings/registerSchool.dart';
 import 'package:find_my_school_updated/screens/settings/terms.dart';
 import 'package:find_my_school_updated/services/auth.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
@@ -28,56 +29,57 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       drawer: MainDrawer(),
-      body: Stack(
-        children: [
-          Container(
-            height: size.height * 0.25,
-            width: size.width,
-            color: primaryColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        "Final All",
-                        style: TextStyle(
-                          fontFamily: 'ss',
-                          color: Colors.white,
-                          fontSize: size.width * 0.08,
-                          fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Stack(
+          children: [
+            Container(
+              height: size.height * 0.25,
+              width: size.width,
+              color: primaryColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "Final All",
+                          style: TextStyle(
+                            fontFamily: 'ss',
+                            color: Colors.white,
+                            fontSize: size.width * 0.08,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: size.height * 0.02),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
-                      child: Text(
-                        "What you need",
-                        style: TextStyle(
-                          fontFamily: 'ss',
-                          color: Colors.white,
-                          fontSize: size.width * 0.08,
-                          fontWeight: FontWeight.normal,
+                      SizedBox(height: size.height * 0.02),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text(
+                          "What you need",
+                          style: TextStyle(
+                            fontFamily: 'ss',
+                            color: Colors.white,
+                            fontSize: size.width * 0.08,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                  size: size.width * 0.2,
-                )
-              ],
+                    ],
+                  ),
+                  Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                    size: size.width * 0.2,
+                  )
+                ],
+              ),
             ),
-          ),
-          Center(
-            child: SingleChildScrollView(
+            Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -239,6 +241,30 @@ class SettingsScreen extends StatelessWidget {
                       elevation: 0.5,
                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                       onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: RegisterSchool(),
+                                type: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 300)));
+                      },
+                      textColor: Colors.black,
+                      color: Colors.white,
+                      child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Register a School",
+                              style:
+                                  TextStyle(fontFamily: 'ss', fontSize: 16))),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    height: size.height * 0.05,
+                    width: size.width * 0.8,
+                    child: RaisedButton(
+                      elevation: 0.5,
+                      //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
+                      onPressed: () {
                         Widget logoutButton = FlatButton(
                           child: Text("Logout"),
                           onPressed: () async {
@@ -282,8 +308,8 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
