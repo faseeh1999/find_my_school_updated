@@ -40,6 +40,7 @@ dependencies:
   firebase_storage:
   image_picker:
   font_awesome_flutter:
+  share:
 
 dev_dependencies:
   flutter_test:

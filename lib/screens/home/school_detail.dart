@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SchoolDetail extends StatefulWidget {
@@ -454,10 +455,10 @@ class _SchoolDetailState extends State<SchoolDetail> {
                                   Center(
                                     child: InkWell(
                                       onTap: () {
-                                        launch('${widget.school.webUrl}');
+                                        ShareSchool(context, widget.school);
                                       },
                                       child: Text(
-                                        "More Deatils",
+                                        "Share with others",
                                         style: TextStyle(
                                             color: Colors.transparent,
                                             shadows: [
@@ -491,6 +492,12 @@ class _SchoolDetailState extends State<SchoolDetail> {
             ),
           ])),
     );
+  }
+
+  void ShareSchool(BuildContext cotext, School school) {
+    final String text =
+        "Check Out This School From Find My School App\nName: ${school.name}\nContact: ${school.contact}\nAddress: ${school.address}\nCity: ${school.city}\nProvince: ${school.province}\nOpening Timing: ${school.openingtiming} AM\nClosing Timing: ${school.normaltiming} PM";
+    Share.share(text, subject: "Find My School School Deatils ${school.name}");
   }
 }
 
