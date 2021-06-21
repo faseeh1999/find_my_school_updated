@@ -94,8 +94,16 @@ class DatabaseService {
     String schoolImage,
     double schoolRating,
   ) async {
+    List<String> splitList = schoolName.split(" ");
+    List<String> indexList = [];
+    for (int i = 0; i < splitList.length; i++) {
+      for (int y = 1; y < splitList[i].length + 1; y++) {
+        indexList.add(splitList[i].substring(0, y).toLowerCase());
+      }
+    }
     return await schoolRequestCollection.add({
       "name": schoolName ?? "Unknown",
+      "searchIndex":indexList ?? [],
       "address": schoolAddress ?? "not present",
       "contact": schoolPhone ?? "no contact",
       "image": schoolLogo ?? "",

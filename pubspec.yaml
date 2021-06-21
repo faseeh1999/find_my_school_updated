@@ -41,6 +41,7 @@ dependencies:
   image_picker:
   font_awesome_flutter:
   share:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

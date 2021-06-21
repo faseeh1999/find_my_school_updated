@@ -1,5 +1,6 @@
 import 'package:find_my_school_updated/screens/authenticate/wrapper.dart';
 import 'package:find_my_school_updated/services/auth.dart';
+import 'package:find_my_school_updated/services/mail.dart';
 
 import 'package:find_my_school_updated/shared/loader.dart';
 import 'package:find_my_school_updated/theme/color.dart';
@@ -18,6 +19,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   // Reference to Auth Service Instance
   final AuthService _auth = AuthService();
+  final MailService _mail = MailService();
 
 // Global Form Key
   GlobalKey<FormState> _form = GlobalKey();
@@ -209,6 +211,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       .registerWithEmailAndPassword(_name.text,
                                           _email.text, _pass.text, _phone.text)
                                       .whenComplete(() {
+                                    _mail.sendRegisterMail(
+                                        _name.text, _email.text);
                                     setState(() {
                                       isLoading = false;
                                     });

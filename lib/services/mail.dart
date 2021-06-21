@@ -52,7 +52,7 @@ class MailService {
     // DONE
   }
 
-  Future sendRegisterMail(String name, String email, String message) async {
+  Future sendRegisterMail(String name, String email) async {
     String username = 'findmyschool2021@gmail.com';
     String password = 'findmyschool123';
 
@@ -71,9 +71,9 @@ class MailService {
     final userMessage = Message()
       ..from = Address(username)
       ..recipients.add(email)
-      ..subject = 'Your Account Has Been Created @ Find My School!!!'
+      ..subject = 'Hello $name\nAccount Has Been Created @ Find My School!!!'
       ..text =
-          'Our Administration team is working day and night on better customer support and to resolve your queries.\nWe will get back to you within 24 hrs.\n\nRegards, Find My School Admin Team';
+          'Your Account has been created & activated.\nYou can LOGIN NOW using $email & your created password.\nHappy Finding Schools!\n\nRegards, Find My School Admin Team';
     // ..html =
     //     "<h1>Write Content Here</h1>\n<p>Hey! Here's some HTML content</p>";
 

@@ -19,6 +19,7 @@ class School {
   final int lowerfeerange;
   final int upperfeerange;
 
+
   // Text Based Search
   // City Based
   // Sector
@@ -47,4 +48,5 @@ class School {
     this.bg,
     this.rating,
   });
+
 }
