@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/screens/home/school_detail.dart';
-import 'package:find_my_school_updated/services/search.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
