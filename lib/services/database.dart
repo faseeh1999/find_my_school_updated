@@ -209,7 +209,7 @@ class DatabaseService {
           feedetails: doc.data['feedetails'] ?? "",
           curriculum: doc.data['curriculum'] ?? "",
           rating: doc.data['rating'] ?? 1.0,
-          reviews: doc.data['reviews'] ?? []);
+          reviews: schoolReviews ?? []);
     }).toList();
   }
 
@@ -221,6 +221,32 @@ class DatabaseService {
       email: snapshot.data['email'],
       phone: snapshot.data['phone'],
     );
+  }
+
+  //convert Document Snapshot to Review Data
+
+  List<Review> _reviewListfromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Review(
+          rating: doc.data['rating'] ?? 1.0,
+          name: doc.data['name'] ?? "Unknown",
+          description: doc.data['description'] ?? "Unknown");
+    }).toList();
+  }
+
+  final CollectionReference reviewsCollection = Firestore.instance
+      .collection('institutes')
+      .document('2ohd1sXhLaiEj6lkcc7w')
+      .collection('reviews');
+  List<Review> schoolReviews = [];
+  // Reviews Stream
+  Stream<QuerySnapshot> get reviews {
+    return reviewsCollection.snapshots();
+    reviews.forEach((element) {
+      element.documents.asMap().forEach((key, value) {
+        schoolReviews.add(element.documents[key]['name']);
+      });
+    });
   }
 
   // School Stream
