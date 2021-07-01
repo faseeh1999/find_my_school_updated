@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:find_my_school_updated/models/review.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:find_my_school_updated/theme/text.dart';
@@ -61,6 +62,7 @@ class _RegisterSchoolState extends State<RegisterSchool> {
   String schoolLogo;
   String schoolImage;
   double schoolRating;
+  List<Review> schoolReviews;
 
   List cityList = [
     'Lahore',
@@ -778,7 +780,8 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                                       schoolWebUrl,
                                       schoolLogo,
                                       schoolImage,
-                                      schoolRating)
+                                      schoolRating,
+                                      schoolReviews)
                                   .whenComplete(() => {
                                         showDialog(
                                             context: context,

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/notification.dart';
+import 'package:find_my_school_updated/models/review.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/models/user.dart';
 
@@ -93,6 +94,7 @@ class DatabaseService {
     String schoolLogo,
     String schoolImage,
     double schoolRating,
+    List<Review> schoolReviews,
   ) async {
     List<String> splitList = schoolName.split(" ");
     List<String> indexList = [];
@@ -103,7 +105,7 @@ class DatabaseService {
     }
     return await schoolRequestCollection.add({
       "name": schoolName ?? "Unknown",
-      "searchIndex":indexList ?? [],
+      "searchIndex": indexList ?? [],
       "address": schoolAddress ?? "not present",
       "contact": schoolPhone ?? "no contact",
       "image": schoolLogo ?? "",
@@ -121,7 +123,8 @@ class DatabaseService {
       "upperfeerange": schoolUpperFeeRange ?? 7000,
       "feedetails": schoolfeeDetails ?? "",
       "curriculum": schoolCurriculum ?? "",
-      "rating": schoolRating ?? 4.0
+      "rating": schoolRating ?? 4.0,
+      "reviews": schoolReviews ?? []
     });
   }
 
@@ -146,7 +149,8 @@ class DatabaseService {
       "upperfeerange": bookmark.upperfeerange ?? 7000,
       "feedetails": bookmark.feedetails ?? "",
       "curriculum": bookmark.curriculum ?? "",
-      "rating": bookmark.rating ?? 1.0
+      "rating": bookmark.rating ?? 1.0,
+      "reviews": bookmark.reviews ?? []
     });
   }
 
@@ -204,7 +208,8 @@ class DatabaseService {
           upperfeerange: doc.data['upperfeerange'] ?? 7000,
           feedetails: doc.data['feedetails'] ?? "",
           curriculum: doc.data['curriculum'] ?? "",
-          rating: doc.data['rating'] ?? 1.0);
+          rating: doc.data['rating'] ?? 1.0,
+          reviews: doc.data['reviews'] ?? []);
     }).toList();
   }
 

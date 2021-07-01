@@ -1,3 +1,5 @@
+import 'package:find_my_school_updated/models/review.dart';
+
 class School {
   final String name;
   final String address;
@@ -18,7 +20,7 @@ class School {
   final String feedetails;
   final int lowerfeerange;
   final int upperfeerange;
-
+  final List<Review> reviews;
 
   // Text Based Search
   // City Based
@@ -27,26 +29,25 @@ class School {
   // Fees Range
   // Province
 
-  School({
-    this.curriculum,
-    this.feedetails,
-    this.lowerfeerange,
-    this.upperfeerange,
-    this.openingtiming,
-    this.location,
-    this.webUrl,
-    this.city,
-    this.province,
-    this.normaltiming,
-    this.fridaytiming,
-    this.category,
-    this.sector,
-    this.name,
-    this.address,
-    this.contact,
-    this.image,
-    this.bg,
-    this.rating,
-  });
-
+  School(
+      {this.curriculum,
+      this.feedetails,
+      this.lowerfeerange,
+      this.upperfeerange,
+      this.openingtiming,
+      this.location,
+      this.webUrl,
+      this.city,
+      this.province,
+      this.normaltiming,
+      this.fridaytiming,
+      this.category,
+      this.sector,
+      this.name,
+      this.address,
+      this.contact,
+      this.image,
+      this.bg,
+      this.rating,
+      this.reviews});
 }
