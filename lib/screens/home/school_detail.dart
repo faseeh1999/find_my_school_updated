@@ -43,8 +43,8 @@ class _SchoolDetailState extends State<SchoolDetail> {
             SchoolAdvance(
               school: widget.school,
             ),
-            Column(
-              children: [Text("Hola")],
+            SchoolReviews(
+              school: widget.school,
             )
             // SchoolReviews(
             //   school: widget.school,

@@ -49,7 +49,7 @@ class _SchoolAdvanceState extends State<SchoolAdvance> {
               child: Center(
                 child: Container(
                   color: Colors.white,
-                  height: size.height * 0.72,
+                  height: size.height * 0.7,
                   width: size.width * 0.9,
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
