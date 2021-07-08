@@ -83,7 +83,7 @@ class _CategoryState extends State<Category> {
                                 context,
                                 PageTransition(
                                     child: SearchResults(
-                                      category: categoryList.first,
+                                      category: categoryList[index].toString(),
                                     ),
                                     type: PageTransitionType.fade));
                           },

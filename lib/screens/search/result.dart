@@ -33,7 +33,7 @@ class _SearchResultsState extends State<SearchResults> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Schools According to ${searchString}",
+            "Schools According to ${widget.category}",
             style: TextStyle(
                 fontSize: size.width * 0.05,
                 fontWeight: FontWeight.w400,
@@ -42,11 +42,11 @@ class _SearchResultsState extends State<SearchResults> {
           ),
           Expanded(
               child: StreamBuilder<QuerySnapshot>(
-            stream: (searchString == null || searchString.trim() == "")
+            stream: (widget.category == null || widget.category.trim() == "")
                 ? Firestore.instance.collection('requests').snapshots()
                 : Firestore.instance
                     .collection('requests')
-                    .where("category", isEqualTo: searchString)
+                    .where("category", isEqualTo: widget.category)
                     .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
