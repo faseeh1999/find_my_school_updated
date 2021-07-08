@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/screens/home/school_detail.dart';
+import 'package:find_my_school_updated/screens/search/category.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
   ];
   List provinceList = ['Punjab', 'Sindh', 'KPK', 'Balochistan', 'Azad Kashmir'];
   List sectorList = ['Public', 'Private', 'Semi-Government'];
-  List categoryList = ['Matriculation', 'O/A Levels', 'Matric & O/A Levels'];
+
   List lowerFee = [1000, 1500, 2000, 2500, 2700, 3000];
   List upperFee = [
     3500,
@@ -95,11 +98,12 @@ class _SearchScreenState extends State<SearchScreen> {
           SizedBox(height: size.height * 0.02),
           Text(
             "Search using these filters",
-            style: GoogleFonts.lato(
-                fontSize: size.width * 0.04,
-                fontWeight: FontWeight.bold,
+            style: TextStyle(
+                fontFamily: 'ss',
+                fontSize: size.width * 0.05,
+                fontWeight: FontWeight.normal,
                 color: Colors.black,
-                letterSpacing: 1.0),
+                letterSpacing: 0.5),
           ),
           SizedBox(height: size.height * 0.002),
           Padding(
@@ -117,37 +121,43 @@ class _SearchScreenState extends State<SearchScreen> {
                             borderRadius: BorderRadius.circular(25.0),
                             color: Colors.transparent,
                             border: Border.all()),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                              style: TextStyle(),
-                              hint: Text(
-                                "Category",
-                                style: TextStyle(
-                                  fontFamily: 'ss',
-                                  color: Colors.black,
-                                  fontSize: size.width * 0.045,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              isExpanded: false,
-                              dropdownColor: Colors.white,
-                              value: searchCategory,
-                              items: categoryList.map((value) {
-                                return new DropdownMenuItem(
-                                    value: value,
-                                    child: new Text(
-                                      value,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'ss'),
-                                      textAlign: TextAlign.center,
-                                    ));
-                              }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  searchCategory = value;
-                                });
-                              }),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: Category(),
+                                    type: PageTransitionType.fade));
+                          },
+                          //style: TextStyle(),
+                          child: Text(
+                            "Category",
+                            style: TextStyle(
+                              fontFamily: 'ss',
+                              color: Colors.black,
+                              fontSize: size.width * 0.045,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          // isExpanded: false,
+                          // dropdownColor: Colors.white,
+                          // value: searchCategory,
+                          // items: categoryList.map((value) {
+                          //   return new DropdownMenuItem(
+                          //       value: value,
+                          //       child: new Text(
+                          //         value,
+                          //         style: TextStyle(
+                          //             color: Colors.black,
+                          //             fontFamily: 'ss'),
+                          //         textAlign: TextAlign.center,
+                          //       ));
+                          // }).toList(),
+                          // onChanged: (value) {
+                          //   setState(() {
+                          //     searchCategory = value;
+                          //   });
+                          // }
                         ),
                       ),
                     ),
@@ -313,14 +323,15 @@ class _SearchScreenState extends State<SearchScreen> {
             thickness: size.height * 0.001,
             color: primaryColor,
           ),
-          SizedBox(height: size.height * 0.02),
+          SizedBox(height: size.height * 0.01),
           Text(
             "Some of The Best Schools are:",
-            style: GoogleFonts.lato(
-                fontSize: size.width * 0.05,
-                fontWeight: FontWeight.w400,
-                color: Colors.black,
-                letterSpacing: 1.0),
+            style: TextStyle(
+              fontFamily: 'ss',
+              fontSize: size.width * 0.05,
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
           ),
           Expanded(
               child: StreamBuilder<QuerySnapshot>(

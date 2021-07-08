@@ -290,6 +290,7 @@ class _RegisterSchoolState extends State<RegisterSchool> {
                     ),
                     SizedBox(height: size.height * 0.02),
                     TextFormField(
+                      keyboardType: TextInputType.phone,
                       onChanged: (val) {
                         setState(() {
                           schoolPhone = val;
