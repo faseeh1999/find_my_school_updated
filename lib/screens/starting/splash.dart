@@ -1,7 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:find_my_school_updated/screens/authenticate/wrapper.dart';
 import 'package:find_my_school_updated/screens/starting/introduction.dart';
+import 'package:find_my_school_updated/screens/starting/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -9,16 +12,32 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      Navigator.pushReplacement(context,
+          PageTransition(child: Wrapper(), type: PageTransitionType.fade));
+    } else {
+      await prefs.setBool('seen', true);
+      Navigator.pushReplacement(context,
+          PageTransition(child: Introduction(), type: PageTransitionType.fade));
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+
     Future.delayed(Duration(milliseconds: 2800), () {
-      Navigator.pushReplacement(
-          context,
-          PageTransition(
-              type: PageTransitionType.fade,
-              duration: Duration(milliseconds: 300),
-              child: Introduction()));
+      checkFirstSeen();
+      // Navigator.pushReplacement(
+      //     context,
+      //     PageTransition(
+      //         type: PageTransitionType.fade,
+      //         duration: Duration(milliseconds: 300),
+      //         child: Introduction()));
     });
   }
 

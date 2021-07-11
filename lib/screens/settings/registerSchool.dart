@@ -110,9 +110,9 @@ class _RegisterSchoolState extends State<RegisterSchool> {
   void initState() {
     super.initState();
 
-    openTime = TimeOfDay.now();
-    closeTime = TimeOfDay.now();
-    fridayTime = TimeOfDay.now();
+    openTime = TimeOfDay(hour: 08, minute: 00);
+    closeTime = TimeOfDay(hour: 14, minute: 00);
+    fridayTime = TimeOfDay(hour: 12, minute: 30);
   }
 
   Future<Null> selectOpenTime(BuildContext context) async {

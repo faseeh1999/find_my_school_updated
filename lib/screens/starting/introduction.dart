@@ -1,11 +1,32 @@
+import 'package:find_my_school_updated/screens/authenticate/wrapper.dart';
 import 'package:find_my_school_updated/screens/starting/welcome.dart';
-
+import 'dart:async';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Introduction extends StatelessWidget {
+class Introduction extends StatefulWidget {
+  @override
+  _IntroductionState createState() => _IntroductionState();
+}
+
+class _IntroductionState extends State<Introduction> {
+  // Future checkFirstSeen() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   bool _seen = (prefs.getBool('seen') ?? false);
+
+  //   if (_seen) {
+  //     Navigator.pushReplacement(context,
+  //         PageTransition(child: Wrapper(), type: PageTransitionType.fade));
+  //   } else {
+  //     await prefs.setBool('seen', true);
+  //     Navigator.pushReplacement(context,
+  //         PageTransition(child: Introduction(), type: PageTransitionType.fade));
+  //   }
+  // }
+
   List<PageViewModel> getPages() {
     return [
       PageViewModel(
@@ -39,6 +60,13 @@ class Introduction extends StatelessWidget {
             bodyTextStyle: TextStyle(fontFamily: 'ss'),
           ))
     ];
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //checkFirstSeen();
   }
 
   @override
