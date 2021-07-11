@@ -5,6 +5,7 @@ import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/screens/home/school_detail.dart';
 import 'package:find_my_school_updated/screens/search/category.dart';
 import 'package:find_my_school_updated/screens/search/city.dart';
+import 'package:find_my_school_updated/screens/search/fee.dart';
 import 'package:find_my_school_updated/screens/search/province.dart';
 import 'package:find_my_school_updated/screens/search/sector.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
@@ -202,6 +203,35 @@ class _SearchScreenState extends State<SearchScreen> {
                           //style: TextStyle(),
                           child: Text(
                             "City",
+                            style: TextStyle(
+                              fontFamily: 'ss',
+                              color: Colors.black,
+                              fontSize: size.width * 0.045,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            color: Colors.transparent,
+                            border: Border.all()),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: Fee(),
+                                    type: PageTransitionType.fade));
+                          },
+                          //style: TextStyle(),
+                          child: Text(
+                            "Fee Range",
                             style: TextStyle(
                               fontFamily: 'ss',
                               color: Colors.black,
