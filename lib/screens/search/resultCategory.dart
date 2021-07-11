@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:page_transition/page_transition.dart';
 
-class SearchResults extends StatefulWidget {
+class SearchResultsCategory extends StatefulWidget {
   final String category;
-  SearchResults({this.category});
+  SearchResultsCategory({this.category});
   @override
-  _SearchResultsState createState() => _SearchResultsState();
+  _SearchResultsCategoryState createState() => _SearchResultsCategoryState();
 }
 
-class _SearchResultsState extends State<SearchResults> {
+class _SearchResultsCategoryState extends State<SearchResultsCategory> {
   String searchString;
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,23 @@ class _SearchResultsState extends State<SearchResults> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              onChanged: (val) {
+                setState(() {
+                  searchString = val.toLowerCase();
+                });
+              },
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  contentPadding: const EdgeInsets.only(left: 25.0),
+                  hintText: "Filter Results",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(4.0))),
+            ),
+          ),
+          SizedBox(height: size.height * 0.02),
           Text(
             "Schools According to ${widget.category}",
             style: TextStyle(
@@ -47,6 +64,7 @@ class _SearchResultsState extends State<SearchResults> {
                 : Firestore.instance
                     .collection('requests')
                     .where("category", isEqualTo: widget.category)
+                    .where("searchIndex", arrayContains: searchString)
                     .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {

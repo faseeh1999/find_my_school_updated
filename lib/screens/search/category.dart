@@ -1,4 +1,4 @@
-import 'package:find_my_school_updated/screens/search/result.dart';
+import 'package:find_my_school_updated/screens/search/resultCategory.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -82,7 +82,7 @@ class _CategoryState extends State<Category> {
                             Navigator.push(
                                 context,
                                 PageTransition(
-                                    child: SearchResults(
+                                    child: SearchResultsCategory(
                                       category: categoryList[index].toString(),
                                     ),
                                     type: PageTransitionType.fade));
