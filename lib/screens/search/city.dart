@@ -112,34 +112,6 @@ class _CityState extends State<City> {
             SizedBox(
               height: size.height * 0.04,
             ),
-            // Center(
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //         color: primaryColorDark,
-            //         border: Border.all(color: Colors.white),
-            //         borderRadius: BorderRadius.circular(10)),
-            //     //color: primaryColorDark,
-            //     height: size.height * 0.1,
-            //     width: size.width * 0.7,
-            //     child: FlatButton(
-            //         onPressed: () {
-            //           Navigator.push(
-            //               context,
-            //               PageTransition(
-            //                   child: SearchResultsCity(
-            //                     city: cityList[cityList.length - 1].toString(),
-            //                   ),
-            //                   type: PageTransitionType.fade));
-            //         },
-            //         child: Text(
-            //           cityList[cityList.length - 1],
-            //           style: TextStyle(
-            //               fontFamily: 'ss',
-            //               fontSize: size.width * 0.06,
-            //               color: Colors.white),
-            //         )),
-            //   ),
-            // )
           ],
         ),
       ),

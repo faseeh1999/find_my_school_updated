@@ -9,15 +9,25 @@ class Fee extends StatefulWidget {
 }
 
 class _FeeState extends State<Fee> {
-  List lowerFee = [1000, 1500, 2000, 2500, 2700, 3000];
-  List upperFee = [
+  List lowerFee = [
+    500,
+    1500,
+    2500,
     3500,
-    4000,
     5000,
-    6000,
     7000,
-    8000,
     9000,
+    11000,
+    13000,
+    16000
+  ];
+  List upperFee = [
+    1000,
+    2000,
+    3000,
+    4000,
+    6000,
+    8000,
     10000,
     12000,
     15000,
@@ -64,7 +74,7 @@ class _FeeState extends State<Fee> {
             Padding(
               padding: EdgeInsets.only(left: size.width * 0.04),
               child: Text(
-                "Lower Fee Range",
+                "Choose Starting Fee Range",
                 style: TextStyle(
                     fontFamily: 'ss',
                     fontSize: size.width * 0.05,
@@ -73,104 +83,58 @@ class _FeeState extends State<Fee> {
             ),
             SizedBox(
               height: size.height * 0.5,
-              child: GridView.count(
+              child: ListView.builder(
+                itemCount: upperFee.length,
                 padding: EdgeInsets.all(size.width * 0.05),
                 shrinkWrap: false,
-
-                // crossAxisSpacing: size.width * .01,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 0,
-                //mainAxisSpacing: size.height * 0.01,
-                // Create a grid with 2 columns. If you change the scrollDirection to
-                // horizontal, this produces 2 rows.
-                crossAxisCount: 2,
-                // Generate 100 widgets that display their index in the List.
-                children: List.generate(lowerFee.length, (index) {
+                itemBuilder: (context, index) {
                   return Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: primaryColorDark,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10)),
-                      //color: primaryColorDark,
-                      height: size.height * 0.1,
-                      width: size.width * 0.5,
-                      child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: SearchResultsFee(
-                                      fee: lowerFee[index],
-                                    ),
-                                    type: PageTransitionType.fade));
-                          },
-                          child: Text(
-                            lowerFee[index].toString(),
-                            style: TextStyle(
-                                fontFamily: 'ss',
-                                fontSize: size.width * 0.06,
-                                color: Colors.white),
-                          )),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.03,
+                          vertical: size.height * 0.035),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: primaryColorDark,
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(10)),
+                        //color: primaryColorDark,
+                        height: size.height * 0.05,
+                        width: size.width * 0.8,
+                        child: FlatButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      child: SearchResultsFee(
+                                        lowerfee: lowerFee[index],
+                                        upperfee: upperFee[index],
+                                      ),
+                                      type: PageTransitionType.fade));
+                            },
+                            child: Text(
+                              "RS:  " +
+                                  lowerFee[index].toString() +
+                                  " - " +
+                                  upperFee[index].toString(),
+                              style: TextStyle(
+                                  fontFamily: 'ss',
+                                  fontSize: size.width * 0.06,
+                                  color: Colors.white),
+                            )),
+                      ),
                     ),
                   );
-                }),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: size.width * 0.04),
-              child: Text(
-                "Higher Fee Range",
-                style: TextStyle(
-                    fontFamily: 'ss',
-                    fontSize: size.width * 0.05,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(
-              height: size.height * 0.5,
-              child: GridView.count(
-                padding: EdgeInsets.all(size.width * 0.05),
-                shrinkWrap: false,
-
-                // crossAxisSpacing: size.width * .01,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 0,
-                //mainAxisSpacing: size.height * 0.01,
-                // Create a grid with 2 columns. If you change the scrollDirection to
-                // horizontal, this produces 2 rows.
-                crossAxisCount: 2,
+                },
+                // // crossAxisSpacing: size.width * .01,
+                // crossAxisSpacing: 20,
+                // mainAxisSpacing: 0,
+                // //mainAxisSpacing: size.height * 0.01,
+                // // Create a grid with 2 columns. If you change the scrollDirection to
+                // // horizontal, this produces 2 rows.
+                // crossAxisCount: 4,
                 // Generate 100 widgets that display their index in the List.
-                children: List.generate(upperFee.length, (index) {
-                  return Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: primaryColorDark,
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(10)),
-                      //color: primaryColorDark,
-                      height: size.height * 0.1,
-                      width: size.width * 0.5,
-                      child: FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    child: SearchResultsFee(
-                                      fee: upperFee[index],
-                                    ),
-                                    type: PageTransitionType.fade));
-                          },
-                          child: Text(
-                            upperFee[index].toString(),
-                            style: TextStyle(
-                                fontFamily: 'ss',
-                                fontSize: size.width * 0.06,
-                                color: Colors.white),
-                          )),
-                    ),
-                  );
-                }),
+                //children: List.generate(lowerFee.length, (index) {}),
               ),
             ),
           ],
