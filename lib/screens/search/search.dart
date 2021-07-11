@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/screens/home/school_detail.dart';
 import 'package:find_my_school_updated/screens/search/category.dart';
+import 'package:find_my_school_updated/screens/search/city.dart';
 import 'package:find_my_school_updated/screens/search/province.dart';
 import 'package:find_my_school_updated/screens/search/sector.dart';
 import 'package:find_my_school_updated/shared/drawer.dart';
@@ -19,24 +20,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List cityList = [
-    'Lahore',
-    'Karachi',
-    'Islamabad',
-    'Peshawar',
-    'Quetta',
-    'Multan',
-    'Faisalabad',
-    'Sialkot',
-    'Gujranwala',
-    'Larkana',
-    'Hyderabad',
-    'Rawalpindi',
-    'Abbotabad',
-    'Mingora',
-    'Mardan'
-  ];
-
   List lowerFee = [1000, 1500, 2000, 2500, 2700, 3000];
   List upperFee = [
     3500,
@@ -190,6 +173,35 @@ class _SearchScreenState extends State<SearchScreen> {
                           //style: TextStyle(),
                           child: Text(
                             "Province",
+                            style: TextStyle(
+                              fontFamily: 'ss',
+                              color: Colors.black,
+                              fontSize: size.width * 0.045,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            color: Colors.transparent,
+                            border: Border.all()),
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    child: City(),
+                                    type: PageTransitionType.fade));
+                          },
+                          //style: TextStyle(),
+                          child: Text(
+                            "City",
                             style: TextStyle(
                               fontFamily: 'ss',
                               color: Colors.black,
