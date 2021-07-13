@@ -1,7 +1,5 @@
 import 'package:find_my_school_updated/models/review.dart';
-import 'package:find_my_school_updated/models/school.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ReviewTile extends StatefulWidget {
   final Review review;

@@ -3,6 +3,10 @@ import 'package:find_my_school_updated/screens/bookmarks/bookmarks.dart';
 import 'package:find_my_school_updated/screens/home/home.dart';
 import 'package:find_my_school_updated/screens/notification/notifications.dart';
 import 'package:find_my_school_updated/screens/search/search.dart';
+import 'package:find_my_school_updated/screens/settings/about.dart';
+import 'package:find_my_school_updated/screens/settings/account.dart';
+import 'package:find_my_school_updated/screens/settings/privacy.dart';
+import 'package:find_my_school_updated/screens/settings/terms.dart';
 import 'package:find_my_school_updated/services/auth.dart';
 import 'package:find_my_school_updated/services/database.dart';
 import 'package:find_my_school_updated/shared/loader.dart';
@@ -89,13 +93,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: RaisedButton.icon(
-                                      label: Text("Home",
+                                      label: Text("Account",
                                           style: TextStyle(
                                             fontFamily: 'ss',
                                             fontSize: size.width * 0.045,
                                           )),
-                                      icon:
-                                          Icon(Icons.add_location_alt_outlined),
+                                      icon: Icon(Icons.person_outline_outlined),
                                       elevation: 0.0,
                                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                       onPressed: () {
@@ -106,7 +109,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                               type: PageTransitionType.fade,
                                               duration:
                                                   Duration(milliseconds: 300),
-                                              child: HomeScreen()),
+                                              child: AccountScreen()),
                                         );
                                       },
                                       textColor: Colors.white,
@@ -125,12 +128,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: RaisedButton.icon(
-                                      label: Text("Search",
+                                      label: Text("Terms",
                                           style: TextStyle(
                                             fontFamily: 'ss',
                                             fontSize: size.width * 0.045,
                                           )),
-                                      icon: Icon(Icons.search),
+                                      icon: Icon(Icons.text_format_sharp),
                                       elevation: 0.0,
                                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                       onPressed: () {
@@ -141,7 +144,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                               type: PageTransitionType.fade,
                                               duration:
                                                   Duration(milliseconds: 300),
-                                              child: SearchScreen()),
+                                              child: TermsScreen()),
                                         );
                                       },
                                       textColor: Colors.white,
@@ -160,12 +163,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: RaisedButton.icon(
-                                      label: Text("Bookmarks",
+                                      label: Text("Privacy Policy",
                                           style: TextStyle(
                                             fontFamily: 'ss',
                                             fontSize: size.width * 0.045,
                                           )),
-                                      icon: Icon(Icons.star_border_outlined),
+                                      icon: Icon(Icons.policy_outlined),
                                       elevation: 0.0,
                                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                       onPressed: () {
@@ -176,7 +179,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                               type: PageTransitionType.fade,
                                               duration:
                                                   Duration(milliseconds: 300),
-                                              child: BookmarksScreen()),
+                                              child: PrivacyScreen()),
                                         );
                                       },
                                       textColor: Colors.white,
@@ -195,13 +198,12 @@ class _MainDrawerState extends State<MainDrawer> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: RaisedButton.icon(
-                                      label: Text("Notifications",
+                                      label: Text("About Us",
                                           style: TextStyle(
                                             fontFamily: 'ss',
                                             fontSize: size.width * 0.045,
                                           )),
-                                      icon: Icon(
-                                          Icons.notifications_none_outlined),
+                                      icon: Icon(Icons.info_outline),
                                       elevation: 0.0,
                                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                       onPressed: () {
@@ -212,7 +214,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                               type: PageTransitionType.fade,
                                               duration:
                                                   Duration(milliseconds: 300),
-                                              child: NotificationScreen()),
+                                              child: AboutScreen()),
                                         );
                                       },
                                       textColor: Colors.white,

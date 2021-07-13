@@ -84,19 +84,20 @@ class _SchoolReviewsState extends State<SchoolReviews> {
                           SizedBox(
                             height: size.height * 0.03,
                           ),
-                          // Expanded(
-                          //     child: Scrollbar(
-                          //   isAlwaysShown: false,
-                          //   child: new ListView.builder(
-                          //       itemCount: 3,
-                          //       //itemCount: widget.school.reviews.length ?? 3,
-                          //       itemBuilder: (context, index) {
-                          //         return Text(items[index]);
-                          //         // return ReviewTile(
-                          //         //   review: widget.school.reviews[index],
-                          //         // );
-                          //       }),
-                          // ))
+                          SizedBox(
+                              height: size.height * 0.6,
+                              child: Scrollbar(
+                                isAlwaysShown: false,
+                                child: new ListView.builder(
+                                    itemCount: widget.school.reviews.length,
+                                    //itemCount: widget.school.reviews.length ?? 3,
+                                    itemBuilder: (context, index) {
+                                      // return Text(items[index]);
+                                      return ReviewTile(
+                                        review: widget.school.reviews[index],
+                                      );
+                                    }),
+                              ))
                         ],
                       ),
                     ),
