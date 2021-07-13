@@ -44,6 +44,8 @@ dependencies:
   shared_preferences:
   url_launcher: ^5.7.10
   flutter_launcher_icons:
+  animated_bottom_navigation_bar:
+  auto_size_text:
 
 dev_dependencies:
   flutter_test:
