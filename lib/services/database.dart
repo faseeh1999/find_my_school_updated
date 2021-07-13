@@ -186,9 +186,19 @@ class DatabaseService {
         .delete();
   }
 
+  List<Review> _reviewListfromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return Review(
+          rating: doc.data['rating'] ?? 1.0,
+          name: doc.data['name'] ?? "Unknown",
+          description: doc.data['description'] ?? "Unknown");
+    }).toList();
+  }
+
   //convert Query Snapshot to School List
   List<School> _schoolListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
+      List<Review> r1 = _reviewListfromSnapshot(snapshot);
       return School(
           name: doc.data['name'] ?? "Unknown",
           address: doc.data['address'] ?? "not present",
@@ -209,7 +219,7 @@ class DatabaseService {
           feedetails: doc.data['feedetails'] ?? "",
           curriculum: doc.data['curriculum'] ?? "",
           rating: doc.data['rating'] ?? 1.0,
-          reviews: schoolReviews ?? []);
+          reviews: r1 ?? []);
     }).toList();
   }
 
@@ -225,28 +235,19 @@ class DatabaseService {
 
   //convert Document Snapshot to Review Data
 
-  List<Review> _reviewListfromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      return Review(
-          rating: doc.data['rating'] ?? 1.0,
-          name: doc.data['name'] ?? "Unknown",
-          description: doc.data['description'] ?? "Unknown");
-    }).toList();
-  }
-
   final CollectionReference reviewsCollection = Firestore.instance
       .collection('institutes')
       .document('2ohd1sXhLaiEj6lkcc7w')
       .collection('reviews');
   List<Review> schoolReviews = [];
   // Reviews Stream
-  Stream<QuerySnapshot> get reviews {
-    return reviewsCollection.snapshots();
-    reviews.forEach((element) {
-      element.documents.asMap().forEach((key, value) {
-        schoolReviews.add(element.documents[key]['name']);
-      });
-    });
+  Stream<List<Review>> get reviews {
+    return reviewsCollection.snapshots().map(_reviewListfromSnapshot);
+    // reviews.forEach((element) {
+    //   element.documents.asMap().forEach((key, value) {
+    //     schoolReviews.add(element.documents[key]['name']);
+    //   });
+    // });
   }
 
   // School Stream
