@@ -63,8 +63,8 @@ class _SchoolTileState extends State<SchoolTile> {
                         school: widget.school,
                       );
                     }),
-                    type: PageTransitionType.rightToLeftWithFade,
-                    duration: Duration(milliseconds: 200)));
+                    type: PageTransitionType.fade,
+                    duration: Duration(milliseconds: 800)));
           },
           title: Text(
             widget.school.name,
