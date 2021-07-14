@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_my_school_updated/models/notification.dart';
-import 'package:find_my_school_updated/models/review.dart';
+
 import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/models/user.dart';
 
@@ -94,7 +94,7 @@ class DatabaseService {
     String schoolLogo,
     String schoolImage,
     double schoolRating,
-    List<Review> schoolReviews,
+    // List<Review> schoolReviews,
   ) async {
     List<String> splitList = schoolName.split(" ");
     List<String> indexList = [];
@@ -124,7 +124,7 @@ class DatabaseService {
       "feedetails": schoolfeeDetails ?? "",
       "curriculum": schoolCurriculum ?? "",
       "rating": schoolRating ?? 4.0,
-      "reviews": schoolReviews ?? []
+      // "reviews": schoolReviews ?? []
     });
   }
 
@@ -150,7 +150,7 @@ class DatabaseService {
       "feedetails": bookmark.feedetails ?? "",
       "curriculum": bookmark.curriculum ?? "",
       "rating": bookmark.rating ?? 1.0,
-      "reviews": bookmark.reviews ?? []
+      // "reviews": bookmark.reviews ?? []
     });
   }
 
@@ -186,40 +186,40 @@ class DatabaseService {
         .delete();
   }
 
-  List<Review> _reviewListfromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      return Review(
-          rating: doc.data['rating'] ?? 1.0,
-          name: doc.data['name'] ?? "Unknown",
-          description: doc.data['description'] ?? "Unknown");
-    }).toList();
-  }
+  // List<Review> _reviewListfromSnapshot(QuerySnapshot snapshot) {
+  //   return snapshot.documents.map((doc) {
+  //     return Review(
+  //         rating: doc.data['rating'] ?? 1.0,
+  //         name: doc.data['name'] ?? "Unknown",
+  //         description: doc.data['description'] ?? "Unknown");
+  //   }).toList();
+  // }
 
   //convert Query Snapshot to School List
   List<School> _schoolListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
-      List<Review> r1 = _reviewListfromSnapshot(snapshot);
+      // List<Review> r1 = _reviewListfromSnapshot(snapshot);
       return School(
-          name: doc.data['name'] ?? "Unknown",
-          address: doc.data['address'] ?? "not present",
-          contact: doc.data['contactnumber'] ?? "no contact",
-          image: doc.data['image'] ?? "",
-          bg: doc.data['bg'] ?? "",
-          sector: doc.data['sector'] ?? "",
-          category: doc.data['category'] ?? "",
-          openingtiming: doc.data['openingtiming'] ?? "",
-          normaltiming: doc.data['normaltiming'] ?? "",
-          fridaytiming: doc.data['fridaytiming'] ?? "",
-          webUrl: doc.data['webUrl'] ?? "",
-          location: doc.data['location'] ?? "",
-          city: doc.data['city'] ?? "",
-          province: doc.data['province'] ?? "",
-          lowerfeerange: doc.data['lowerfeerange'] ?? 2000,
-          upperfeerange: doc.data['upperfeerange'] ?? 7000,
-          feedetails: doc.data['feedetails'] ?? "",
-          curriculum: doc.data['curriculum'] ?? "",
-          rating: doc.data['rating'] ?? 1.0,
-          reviews: r1 ?? []);
+        name: doc.data['name'] ?? "Unknown",
+        address: doc.data['address'] ?? "not present",
+        contact: doc.data['contactnumber'] ?? "no contact",
+        image: doc.data['image'] ?? "",
+        bg: doc.data['bg'] ?? "",
+        sector: doc.data['sector'] ?? "",
+        category: doc.data['category'] ?? "",
+        openingtiming: doc.data['openingtiming'] ?? "",
+        normaltiming: doc.data['normaltiming'] ?? "",
+        fridaytiming: doc.data['fridaytiming'] ?? "",
+        webUrl: doc.data['webUrl'] ?? "",
+        location: doc.data['location'] ?? "",
+        city: doc.data['city'] ?? "",
+        province: doc.data['province'] ?? "",
+        lowerfeerange: doc.data['lowerfeerange'] ?? 2000,
+        upperfeerange: doc.data['upperfeerange'] ?? 7000,
+        feedetails: doc.data['feedetails'] ?? "",
+        curriculum: doc.data['curriculum'] ?? "",
+        rating: doc.data['rating'] ?? 1.0,
+      );
     }).toList();
   }
 
@@ -235,20 +235,20 @@ class DatabaseService {
 
   //convert Document Snapshot to Review Data
 
-  final CollectionReference reviewsCollection = Firestore.instance
-      .collection('institutes')
-      .document('2ohd1sXhLaiEj6lkcc7w')
-      .collection('reviews');
-  List<Review> schoolReviews = [];
+  // final CollectionReference reviewsCollection = Firestore.instance
+  //     .collection('institutes')
+  //     .document('2ohd1sXhLaiEj6lkcc7w')
+  //     .collection('reviews');
+  // List<Review> schoolReviews = [];
   // Reviews Stream
-  Stream<List<Review>> get reviews {
-    return reviewsCollection.snapshots().map(_reviewListfromSnapshot);
-    // reviews.forEach((element) {
-    //   element.documents.asMap().forEach((key, value) {
-    //     schoolReviews.add(element.documents[key]['name']);
-    //   });
-    // });
-  }
+  // Stream<List<Review>> get reviews {
+  //   return reviewsCollection.snapshots().map(_reviewListfromSnapshot);
+  //   // reviews.forEach((element) {
+  //   //   element.documents.asMap().forEach((key, value) {
+  //   //     schoolReviews.add(element.documents[key]['name']);
+  //   //   });
+  //   // });
+  // }
 
   // School Stream
   Stream<List<School>> get schools {

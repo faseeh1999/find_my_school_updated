@@ -63,9 +63,9 @@ class _SearchResultsFeeState extends State<SearchResultsFee> {
               child: StreamBuilder<QuerySnapshot>(
             stream: (widget.lowerfee == null ||
                     widget.lowerfee.toString().trim() == "")
-                ? Firestore.instance.collection('requests').snapshots()
+                ? Firestore.instance.collection('institutes').snapshots()
                 : Firestore.instance
-                    .collection('requests')
+                    .collection('institutes')
                     .where("lowerfeerange",
                         isGreaterThanOrEqualTo: widget.lowerfee)
                     // .where("upperfeerange",

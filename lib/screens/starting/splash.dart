@@ -1,7 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:find_my_school_updated/screens/authenticate/wrapper.dart';
 import 'package:find_my_school_updated/screens/starting/introduction.dart';
-import 'package:find_my_school_updated/screens/starting/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';

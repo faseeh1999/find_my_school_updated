@@ -52,25 +52,67 @@ class PrivacyScreen extends StatelessWidget {
                       width: size.width * 0.85,
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: Column(
-                          children: [
-                            PrivacyText,
-                            SizedBox(height: size.height * 0.03),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    PageTransition(
-                                        child: ContactUs(),
-                                        type: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 300)));
-                              },
-                              child: Text(
-                                "Do you have any Questions?",
-                                style: LinkTextStyle,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Privacy Policy",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
                               ),
-                            )
-                          ],
+                              SizedBox(height: size.height * 0.01),
+                              PrivacyText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Logs",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              LogText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Security",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              SecurityText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Contact",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              ContactText,
+                              SizedBox(height: size.height * 0.03),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      PageTransition(
+                                          child: ContactUs(),
+                                          type: PageTransitionType.fade,
+                                          duration:
+                                              Duration(milliseconds: 300)));
+                                },
+                                child: Text(
+                                  "Do you have any Questions?",
+                                  style: LinkTextStyle,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

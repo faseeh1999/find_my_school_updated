@@ -60,9 +60,9 @@ class _SearchResultsProvinceState extends State<SearchResultsProvince> {
           Expanded(
               child: StreamBuilder<QuerySnapshot>(
             stream: (widget.province == null || widget.province.trim() == "")
-                ? Firestore.instance.collection('requests').snapshots()
+                ? Firestore.instance.collection('institutes').snapshots()
                 : Firestore.instance
-                    .collection('requests')
+                    .collection('institutes')
                     .where("province", isEqualTo: widget.province)
                     .where("searchIndex", arrayContains: searchString)
                     .snapshots(),

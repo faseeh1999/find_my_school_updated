@@ -50,7 +50,42 @@ class AboutScreen extends StatelessWidget {
                       width: size.width * 0.85,
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: AboutText,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Introduction",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              IntroText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Working",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              WorkingText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Walkthrough",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              WalkthroughText
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),

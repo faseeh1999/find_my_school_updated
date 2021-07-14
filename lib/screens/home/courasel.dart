@@ -1,7 +1,5 @@
-import 'package:find_my_school_updated/models/school.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:provider/provider.dart';
 
 class Carousel extends StatefulWidget {
   @override

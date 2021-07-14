@@ -9,7 +9,7 @@ class Province extends StatefulWidget {
 }
 
 class _ProvinceState extends State<Province> {
-  List provinceList = ['Punjab', 'Sindh', 'KPK', 'Balochistan', 'Azad Kashmir'];
+  List provinceList = ['Punjab', 'Sindh', 'KPK', 'Balochistan'];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -49,7 +49,7 @@ class _ProvinceState extends State<Province> {
               height: size.height * 0.03,
             ),
             SizedBox(
-              height: size.height * 0.4,
+              height: size.height * 0.7,
               child: GridView.count(
                 padding: EdgeInsets.all(size.width * 0.05),
                 shrinkWrap: false,
@@ -94,38 +94,6 @@ class _ProvinceState extends State<Province> {
                 }),
               ),
             ),
-            SizedBox(
-              height: size.height * 0.04,
-            ),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: primaryColorDark,
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.circular(10)),
-                //color: primaryColorDark,
-                height: size.height * 0.1,
-                width: size.width * 0.7,
-                child: FlatButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: SearchResultsProvince(
-                                province: provinceList[provinceList.length - 1]
-                                    .toString(),
-                              ),
-                              type: PageTransitionType.fade));
-                    },
-                    child: Text(
-                      provinceList[provinceList.length - 1],
-                      style: TextStyle(
-                          fontFamily: 'ss',
-                          fontSize: size.width * 0.06,
-                          color: Colors.white),
-                    )),
-              ),
-            )
           ],
         ),
       ),

@@ -60,9 +60,9 @@ class _SearchResultSectorState extends State<SearchResultSector> {
           Expanded(
               child: StreamBuilder<QuerySnapshot>(
             stream: (widget.sector == null || widget.sector.trim() == "")
-                ? Firestore.instance.collection('requests').snapshots()
+                ? Firestore.instance.collection('institutes').snapshots()
                 : Firestore.instance
-                    .collection('requests')
+                    .collection('institutes')
                     .where("sector", isEqualTo: widget.sector)
                     .where("searchIndex", arrayContains: searchString)
                     .snapshots(),

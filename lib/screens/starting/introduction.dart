@@ -1,11 +1,9 @@
-import 'package:find_my_school_updated/screens/authenticate/wrapper.dart';
 import 'package:find_my_school_updated/screens/starting/welcome.dart';
-import 'dart:async';
+
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Introduction extends StatefulWidget {
   @override

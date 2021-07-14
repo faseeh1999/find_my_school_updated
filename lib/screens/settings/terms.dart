@@ -50,7 +50,42 @@ class TermsScreen extends StatelessWidget {
                       width: size.width * 0.85,
                       child: Padding(
                         padding: const EdgeInsets.all(30.0),
-                        child: TermsText,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Terms & Conditions",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              TermsText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Changes",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              ChangesText,
+                              SizedBox(height: size.height * 0.01),
+                              Text(
+                                "Contact",
+                                style: TextStyle(
+                                    fontSize: size.width * 0.05,
+                                    fontFamily: 'ss',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: size.height * 0.01),
+                              ContactText
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ),

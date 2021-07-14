@@ -117,7 +117,7 @@ class SettingsScreen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   PageTransition(
-                                      child: ChangePassword(),
+                                      child: AccountScreen(),
                                       type: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 300)));
                             },
@@ -126,13 +126,13 @@ class SettingsScreen extends StatelessWidget {
                             child: Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  "Change Password",
+                                  "Account",
                                   style: TextStyle(
                                       letterSpacing: 0.5,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                       fontFamily: 'ss',
-                                      fontSize: size.width * 0.04),
+                                      fontSize: size.width * 0.05),
                                 )),
                           ),
                         ),
@@ -182,7 +182,7 @@ class SettingsScreen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   PageTransition(
-                                      child: AboutScreen(),
+                                      child: ChangePassword(),
                                       type: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 300)));
                             },
@@ -190,12 +190,12 @@ class SettingsScreen extends StatelessWidget {
                             color: primaryColorDark,
                             child: Align(
                                 alignment: Alignment.center,
-                                child: Text("About Us",
+                                child: Text("Change Password",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontFamily: 'ss',
-                                        fontSize: size.width * 0.05))),
+                                        fontSize: size.width * 0.04))),
                           ),
                         ),
                         Container(

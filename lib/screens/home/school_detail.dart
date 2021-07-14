@@ -2,7 +2,7 @@ import 'package:find_my_school_updated/models/school.dart';
 import 'package:find_my_school_updated/models/user.dart';
 import 'package:find_my_school_updated/screens/home/school_advance.dart';
 import 'package:find_my_school_updated/screens/home/school_basic.dart';
-import 'package:find_my_school_updated/screens/home/school_reviews.dart';
+
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class _SchoolDetailState extends State<SchoolDetail> {
     Size size = MediaQuery.of(context).size;
     final user = Provider.of<User>(context);
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(color: Colors.white),
@@ -43,9 +43,9 @@ class _SchoolDetailState extends State<SchoolDetail> {
             SchoolAdvance(
               school: widget.school,
             ),
-            SchoolReviews(
-              school: widget.school,
-            )
+            // SchoolReviews(
+            //   school: widget.school,
+            // )
             // SchoolReviews(
             //   school: widget.school,
             // )
@@ -69,10 +69,10 @@ Widget menu() {
           text: "Details",
           icon: Icon(Icons.assignment_outlined),
         ),
-        Tab(
-          text: "Reviews",
-          icon: Icon(Icons.rate_review_outlined),
-        )
+        // Tab(
+        //   text: "Reviews",
+        //   icon: Icon(Icons.rate_review_outlined),
+        // )
       ],
     ),
   );

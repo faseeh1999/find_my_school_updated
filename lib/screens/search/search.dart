@@ -12,7 +12,6 @@ import 'package:find_my_school_updated/shared/drawer.dart';
 import 'package:find_my_school_updated/theme/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -265,9 +264,9 @@ class _SearchScreenState extends State<SearchScreen> {
           Expanded(
               child: StreamBuilder<QuerySnapshot>(
             stream: (searchString == null || searchString.trim() == "")
-                ? Firestore.instance.collection('requests').snapshots()
+                ? Firestore.instance.collection('institutes').snapshots()
                 : Firestore.instance
-                    .collection('requests')
+                    .collection('institutes')
                     .where("searchIndex", arrayContains: searchString)
                     .snapshots(),
             builder: (context, snapshot) {

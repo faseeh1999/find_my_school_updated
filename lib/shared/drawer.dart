@@ -1,8 +1,4 @@
 import 'package:find_my_school_updated/models/user.dart';
-import 'package:find_my_school_updated/screens/bookmarks/bookmarks.dart';
-import 'package:find_my_school_updated/screens/home/home.dart';
-import 'package:find_my_school_updated/screens/notification/notifications.dart';
-import 'package:find_my_school_updated/screens/search/search.dart';
 import 'package:find_my_school_updated/screens/settings/about.dart';
 import 'package:find_my_school_updated/screens/settings/account.dart';
 import 'package:find_my_school_updated/screens/settings/privacy.dart';
@@ -93,12 +89,13 @@ class _MainDrawerState extends State<MainDrawer> {
                                   child: Align(
                                     alignment: Alignment.centerLeft,
                                     child: RaisedButton.icon(
-                                      label: Text("Account",
+                                      label: Text("About Us",
                                           style: TextStyle(
                                             fontFamily: 'ss',
                                             fontSize: size.width * 0.045,
                                           )),
-                                      icon: Icon(Icons.person_outline_outlined),
+                                      icon: Icon(
+                                          Icons.insert_drive_file_outlined),
                                       elevation: 0.0,
                                       //padding: EdgeInsets.symmetric(horizontal: size.width*0.35,vertical: size.height*0.02),
                                       onPressed: () {
@@ -109,7 +106,7 @@ class _MainDrawerState extends State<MainDrawer> {
                                               type: PageTransitionType.fade,
                                               duration:
                                                   Duration(milliseconds: 300),
-                                              child: AccountScreen()),
+                                              child: AboutScreen()),
                                         );
                                       },
                                       textColor: Colors.white,

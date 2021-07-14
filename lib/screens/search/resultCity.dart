@@ -61,9 +61,9 @@ class _SearchResultsCityState extends State<SearchResultsCity> {
           Expanded(
               child: StreamBuilder<QuerySnapshot>(
             stream: (widget.city == null || widget.city.trim() == "")
-                ? Firestore.instance.collection('requests').snapshots()
+                ? Firestore.instance.collection('institutes').snapshots()
                 : Firestore.instance
-                    .collection('requests')
+                    .collection('institutes')
                     .where("city", isEqualTo: widget.city)
                     .where("searchIndex", arrayContains: searchString)
                     .snapshots(),
